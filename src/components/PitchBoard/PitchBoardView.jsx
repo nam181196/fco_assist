@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2 } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2, Move } from 'lucide-react';
 import playersData from '../../data/players.json';
 import formationsData from '../../data/formations.json';
 
@@ -21,38 +21,50 @@ export const PitchBoardView = ({
   const [pitchPerspective, setPitchPerspective] = useState('2D'); // '2D' | '3D'
   const [selectedSlotForAdd, setSelectedSlotForAdd] = useState(null);
   const [searchFilter, setSearchFilter] = useState('');
-  const [draggedNodeId, setDraggedNodeId] = useState(null);
+  
+  // Free Dragging Node State
+  const [activeDraggingSlotId, setActiveDraggingSlotId] = useState(null);
   const [customPositions, setCustomPositions] = useState({}); // { slotId: { gridX, gridY } }
-
+  
+  const pitchRef = useRef(null);
   const activePositions = currentFormation?.positions || [];
 
-  // Drag & Drop position handlers for Sơ đồ Độc Lạ
-  const handleDragStart = (e, slotId) => {
-    setDraggedNodeId(slotId);
-    e.dataTransfer.setData('text/plain', slotId);
+  // Smooth Pointer Dragging Handlers for Sơ đồ Độc Lạ (Mouse & Touch)
+  const handlePointerDown = (e, slotId) => {
+    e.stopPropagation();
+    setActiveDraggingSlotId(slotId);
+    e.target.setPointerCapture(e.pointerId);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDropOnPitch = (e) => {
-    e.preventDefault();
-    if (!draggedNodeId) return;
-
-    const rect = e.currentTarget.getBoundingClientRect();
+  const handlePointerMove = (e, slotId) => {
+    if (activeDraggingSlotId !== slotId || !pitchRef.current) return;
+    
+    const rect = pitchRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const gridX = Math.max(5, Math.min(95, Math.round((x / rect.width) * 100)));
-    const gridY = Math.max(5, Math.min(95, Math.round((y / rect.height) * 100)));
+    const gridX = Math.max(4, Math.min(96, Math.round((x / rect.width) * 100)));
+    const gridY = Math.max(4, Math.min(96, Math.round((y / rect.height) * 100)));
 
     setCustomPositions(prev => ({
       ...prev,
-      [draggedNodeId]: { gridX, gridY }
+      [slotId]: { gridX, gridY }
     }));
+  };
 
-    setDraggedNodeId(null);
+  const handlePointerUp = (e, slotId) => {
+    if (activeDraggingSlotId === slotId) {
+      setActiveDraggingSlotId(null);
+      try {
+        e.target.releasePointerCapture(e.pointerId);
+      } catch (err) {
+        // Safe release fallback
+      }
+    }
+  };
+
+  const resetPositions = () => {
+    setCustomPositions({});
   };
 
   const filteredPlayers = playersData.filter(p =>
@@ -106,9 +118,29 @@ export const PitchBoardView = ({
             </button>
           </div>
 
-          {/* Perspective View Switcher (2D <-> 3D) & Formation Picker */}
+          {/* Perspective View Switcher (2D <-> 3D) & Reset Position Button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             
+            <button
+              onClick={resetPositions}
+              title="Đặt lại vị trí chuẩn sơ đồ"
+              style={{
+                padding: '6px 10px',
+                borderRadius: '8px',
+                border: '1px solid var(--glass-border)',
+                background: 'var(--bg-tertiary)',
+                color: 'var(--text-muted)',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <RefreshCw size={12} /> Đặt lại Vị trí
+            </button>
+
             {/* 2D / 3D Pitch Toggle Button (v2.0.0 Feature) */}
             <div style={{ display: 'flex', background: 'var(--bg-tertiary)', padding: '3px', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
               <button
@@ -121,7 +153,8 @@ export const PitchBoardView = ({
                   color: pitchPerspective === '2D' ? '#000' : 'var(--text-main)',
                   fontWeight: 800,
                   fontSize: '0.75rem',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 📐 Sân 2D Phẳng
@@ -132,11 +165,12 @@ export const PitchBoardView = ({
                   padding: '6px 12px',
                   borderRadius: '6px',
                   border: 'none',
-                  background: pitchPerspective === '3D' ? 'var(--accent-cyan)' : 'transparent',
+                  background: pitchPerspective === '3D' ? '#06b6d4' : 'transparent',
                   color: pitchPerspective === '3D' ? '#000' : 'var(--text-main)',
                   fontWeight: 800,
                   fontSize: '0.75rem',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 🏟️ Sân 3D Perspective
@@ -166,135 +200,174 @@ export const PitchBoardView = ({
 
         </div>
 
-        {/* Current Game Mode & Custom Pitch Drag Info Banner */}
+        {/* Info Banner: Free Drag & Drop Instructions */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-tertiary)', padding: '10px 16px', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-            💡 <strong style={{ color: 'var(--accent-gold)' }}>Mẹo v2.0.0:</strong> Kéo & thả nút vị trí để tạo <strong>Sơ đồ Độc Lạ</strong> tùy biến.
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Move size={14} color="var(--accent-gold)" />
+            <span>Chuột nhấn & giữ bất kỳ vị trí nút cầu thủ để <strong>KÉO THẢ TỰ DO</strong> tạo Sơ đồ Độc Lạ.</span>
           </div>
           <div style={{ fontSize: '0.75rem', fontWeight: 800, color: gameMode === 'MANAGER_SIM' ? '#10b981' : '#3b82f6', display: 'flex', alignItems: 'center', gap: '4px' }}>
             {gameMode === 'MANAGER_SIM' ? <Cpu size={14} /> : <Gamepad2 size={14} />}
-            <span>{gameMode === 'MANAGER_SIM' ? 'CHẾ ĐỘ GIẢ LẬP GLXH' : 'CHẾ ĐỘ XẾP HẠNG 1V1'}</span>
+            <span>{gameMode === 'MANAGER_SIM' ? 'ĐẤU GIẢ LẬP GLXH' : 'ĐẤU XẾP HẠNG 1V1'}</span>
           </div>
         </div>
 
-        {/* Dynamic Pitch Field Canvas Container (Supports 2D & 3D Perspective) */}
-        <div
-          onDragOver={handleDropOnPitch ? (e) => e.preventDefault() : undefined}
-          onDrop={handleDropOnPitch}
-          className={pitchPerspective === '3D' ? 'perspective-pitch' : ''}
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '540px',
-            borderRadius: '16px',
-            background: pitchPerspective === '3D'
-              ? 'radial-gradient(circle, #15803d 0%, #064e3b 100%)'
-              : 'linear-gradient(180deg, #166534 0%, #14532d 100%)',
-            border: '2px solid rgba(255,255,255,0.2)',
-            overflow: 'hidden',
-            boxShadow: pitchPerspective === '3D' ? '0 20px 40px rgba(0,0,0,0.6)' : 'none',
-            transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-          }}
-        >
-          {/* Pitch Lines Overlay */}
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, border: '2px solid rgba(255,255,255,0.25)', margin: '15px', pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '2px', background: 'rgba(255,255,255,0.25)', pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', top: '50%', left: '50%', width: '100px', height: '100px', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
+        {/* Pitch Canvas Container (Wrapper for 3D Perspective Depth) */}
+        <div className={pitchPerspective === '3D' ? 'pitch-perspective-wrapper' : ''}>
+          
+          <div
+            ref={pitchRef}
+            className={pitchPerspective === '3D' ? 'pitch-canvas-3d' : ''}
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: '560px',
+              borderRadius: '20px',
+              background: pitchPerspective === '3D'
+                ? 'repeating-linear-gradient(0deg, #15803d, #15803d 40px, #166534 40px, #166534 80px)'
+                : 'repeating-linear-gradient(0deg, #166534, #166534 40px, #14532d 40px, #14532d 80px)',
+              border: pitchPerspective === '3D' ? '4px solid rgba(255,255,255,0.4)' : '2px solid var(--glass-border)',
+              overflow: 'hidden',
+              boxShadow: pitchPerspective === '3D' ? 'inset 0 0 100px rgba(0,0,0,0.6)' : 'none',
+              touchAction: 'none'
+            }}
+          >
+            {/* Pitch Marking Lines */}
+            {/* Outer Border Line */}
+            <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', bottom: '15px', border: '2px solid var(--pitch-line)', pointerEvents: 'none' }} />
+            
+            {/* Halfway Line */}
+            <div style={{ position: 'absolute', top: '50%', left: '15px', right: '15px', height: '2px', background: 'var(--pitch-line)', pointerEvents: 'none' }} />
+            
+            {/* Center Circle */}
+            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120px', height: '120px', border: '2px solid var(--pitch-line)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '8px', height: '8px', background: 'var(--pitch-line)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
 
-          {/* 11 Player Slot Nodes on Pitch */}
-          {activePositions.map((pos) => {
-            const player = slotMap[pos.id];
-            const customPos = customPositions[pos.id];
-            const posX = customPos ? customPos.gridX : pos.gridX;
-            const posY = customPos ? customPos.gridY : pos.gridY;
+            {/* Top Goal Penalty Box */}
+            <div style={{ position: 'absolute', top: '15px', left: '25%', right: '25%', height: '100px', border: '2px solid var(--pitch-line)', borderTop: 'none', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '15px', left: '35%', right: '35%', height: '40px', border: '2px solid var(--pitch-line)', borderTop: 'none', pointerEvents: 'none' }} />
 
-            return (
-              <div
-                key={pos.id}
-                draggable
-                onDragStart={(e) => handleDragStart(e, pos.id)}
-                style={{
-                  position: 'absolute',
-                  left: `${posX}%`,
-                  top: `${posY}%`,
-                  transform: 'translate(-50%, -50%)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  cursor: 'grab',
-                  zIndex: 10,
-                  transition: draggedNodeId === pos.id ? 'none' : 'all 0.2s ease'
-                }}
-              >
-                {/* Node Circle Button */}
+            {/* Bottom Goal Penalty Box */}
+            <div style={{ position: 'absolute', bottom: '15px', left: '25%', right: '25%', height: '100px', border: '2px solid var(--pitch-line)', borderBottom: 'none', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', bottom: '15px', left: '35%', right: '35%', height: '40px', border: '2px solid var(--pitch-line)', borderBottom: 'none', pointerEvents: 'none' }} />
+
+            {/* 11 Player Interactive Slot Nodes on Pitch */}
+            {activePositions.map((pos) => {
+              const player = slotMap[pos.id];
+              const customPos = customPositions[pos.id];
+              const posX = customPos ? customPos.gridX : pos.gridX;
+              const posY = customPos ? customPos.gridY : pos.gridY;
+              const isDragging = activeDraggingSlotId === pos.id;
+
+              return (
                 <div
-                  onClick={() => setSelectedSlotForAdd(pos)}
+                  key={pos.id}
+                  onPointerDown={(e) => handlePointerDown(e, pos.id)}
+                  onPointerMove={(e) => handlePointerMove(e, pos.id)}
+                  onPointerUp={(e) => handlePointerUp(e, pos.id)}
+                  className={pitchPerspective === '3D' ? 'pitch-node-counter-3d' : ''}
                   style={{
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: '50%',
-                    background: player ? 'var(--bg-tertiary)' : 'rgba(0,0,0,0.6)',
-                    border: player ? '2px solid var(--accent-gold)' : '2px dashed #fff',
+                    position: 'absolute',
+                    left: `${posX}%`,
+                    top: `${posY}%`,
+                    transform: pitchPerspective === '3D'
+                      ? 'translate(-50%, -50%) rotateX(-48deg) translateZ(15px)'
+                      : 'translate(-50%, -50%)',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
-                    fontWeight: 800,
-                    fontSize: '0.8rem',
-                    boxShadow: '0 4px 10px rgba(0,0,0,0.4)',
-                    position: 'relative'
+                    cursor: isDragging ? 'grabbing' : 'grab',
+                    zIndex: isDragging ? 50 : 10,
+                    userSelect: 'none',
+                    touchAction: 'none'
                   }}
                 >
-                  {player ? (
-                    <span style={{ color: 'var(--accent-gold)' }}>{player.salary}</span>
-                  ) : (
-                    <Plus size={18} />
-                  )}
+                  {/* Node Circle Counter */}
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedSlotForAdd(pos);
+                    }}
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '50%',
+                      background: player
+                        ? 'linear-gradient(135deg, #1e293b, #0f172a)'
+                        : 'rgba(0,0,0,0.75)',
+                      border: isDragging
+                        ? '3px solid #3b82f6'
+                        : player
+                        ? '2.5px solid var(--accent-gold)'
+                        : '2.5px dashed rgba(255,255,255,0.7)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      fontWeight: 800,
+                      fontSize: '0.85rem',
+                      boxShadow: isDragging
+                        ? '0 0 20px #3b82f6'
+                        : '0 6px 14px rgba(0,0,0,0.6)',
+                      position: 'relative',
+                      transition: 'transform 0.15s ease'
+                    }}
+                  >
+                    {player ? (
+                      <span style={{ color: 'var(--accent-gold)' }}>{player.salary}</span>
+                    ) : (
+                      <Plus size={20} />
+                    )}
 
-                  {player && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removePlayerFromSlot(pos.id);
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '-4px',
-                        right: '-4px',
-                        width: '18px',
-                        height: '18px',
-                        borderRadius: '50%',
-                        background: 'var(--salary-alert)',
-                        border: 'none',
-                        color: '#fff',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <Trash2 size={10} />
-                    </button>
-                  )}
+                    {player && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removePlayerFromSlot(pos.id);
+                        }}
+                        style={{
+                          position: 'absolute',
+                          top: '-4px',
+                          right: '-4px',
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '50%',
+                          background: 'var(--salary-alert)',
+                          border: 'none',
+                          color: '#fff',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.4)'
+                        }}
+                      >
+                        <Trash2 size={11} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Role Badge & Player Name */}
+                  <div style={{
+                    marginTop: '4px',
+                    padding: '2px 8px',
+                    borderRadius: '12px',
+                    background: 'rgba(15, 23, 42, 0.9)',
+                    border: '1px solid var(--glass-border)',
+                    color: player ? '#fff' : 'var(--accent-gold)',
+                    fontWeight: 800,
+                    fontSize: '0.72rem',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.5)'
+                  }}>
+                    {pos.role} {player ? `• ${player.name}` : ''}
+                  </div>
+
                 </div>
+              );
+            })}
 
-                {/* Role Badge & Player Name */}
-                <span style={{
-                  marginTop: '4px',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  background: 'rgba(0,0,0,0.85)',
-                  color: player ? '#fff' : 'var(--accent-gold)',
-                  fontWeight: 800,
-                  fontSize: '0.7rem',
-                  whiteSpace: 'nowrap'
-                }}>
-                  {pos.role} {player ? `• ${player.name}` : ''}
-                </span>
-
-              </div>
-            );
-          })}
+          </div>
 
         </div>
 
@@ -327,7 +400,7 @@ export const PitchBoardView = ({
           }}
         />
 
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '420px' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '440px' }}>
           {filteredPlayers.map(p => (
             <div
               key={p.id}
