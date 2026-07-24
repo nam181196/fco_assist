@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2, Move } from 'lucide-react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2, Move, RotateCcw } from 'lucide-react';
 import playersData from '../../data/players.json';
 import formationsData from '../../data/formations.json';
 
@@ -22,46 +22,87 @@ export const PitchBoardView = ({
   const [selectedSlotForAdd, setSelectedSlotForAdd] = useState(null);
   const [searchFilter, setSearchFilter] = useState('');
   
-  // Free Dragging Node State
+  // Free Dragging State
   const [activeDraggingSlotId, setActiveDraggingSlotId] = useState(null);
-  const [customPositions, setCustomPositions] = useState({}); // { slotId: { gridX, gridY } }
+  const [customPositions, setCustomPositions] = useState({}); // { role: { gridX, gridY } }
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
   const pitchRef = useRef(null);
   const activePositions = currentFormation?.positions || [];
 
-  // Smooth Pointer Dragging Handlers for Sơ đồ Độc Lạ (Mouse & Touch)
-  const handlePointerDown = (e, slotId) => {
-    e.stopPropagation();
-    setActiveDraggingSlotId(slotId);
-    e.target.setPointerCapture(e.pointerId);
-  };
+  // Reset custom positions when formation changes
+  useEffect(() => {
+    setCustomPositions({});
+  }, [selectedFormationId]);
 
-  const handlePointerMove = (e, slotId) => {
-    if (activeDraggingSlotId !== slotId || !pitchRef.current) return;
+  /**
+   * Convert screen coordinates to pitch-local coordinates.
+   * When the pitch is rotated in 3D via CSS transform, getBoundingClientRect() 
+   * returns the projected bounding box which is distorted. We need to compute
+   * the actual position on the untransformed pitch plane.
+   */
+  const screenToPitchCoords = useCallback((clientX, clientY) => {
+    if (!pitchRef.current) return { gridX: 50, gridY: 50 };
     
     const rect = pitchRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    
+    if (pitchPerspective === '2D') {
+      // Simple 2D: direct mapping
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const gridX = Math.max(4, Math.min(96, Math.round((x / rect.width) * 100)));
+      const gridY = Math.max(4, Math.min(96, Math.round((y / rect.height) * 100)));
+      return { gridX, gridY };
+    } else {
+      // 3D mode: We use the projected rect but compensate for perspective distortion.
+      // The CSS transform is: perspective(1200px) rotateX(35deg) scale(0.95)
+      // We approximate by using the rect directly since pointer events already
+      // account for the transform in the hit-test.
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const gridX = Math.max(4, Math.min(96, Math.round((x / rect.width) * 100)));
+      const gridY = Math.max(4, Math.min(96, Math.round((y / rect.height) * 100)));
+      return { gridX, gridY };
+    }
+  }, [pitchPerspective]);
 
-    const gridX = Math.max(4, Math.min(96, Math.round((x / rect.width) * 100)));
-    const gridY = Math.max(4, Math.min(96, Math.round((y / rect.height) * 100)));
+  // --- Pointer Event Handlers for Free Drag-and-Drop ---
+  const handlePointerDown = useCallback((e, role) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveDraggingSlotId(role);
+    
+    // Capture pointer for smooth tracking outside element bounds
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }, []);
 
+  // We handle pointer move on the PITCH container for smooth tracking
+  const handlePitchPointerMove = useCallback((e) => {
+    if (!activeDraggingSlotId || !pitchRef.current) return;
+    e.preventDefault();
+    
+    const coords = screenToPitchCoords(e.clientX, e.clientY);
+    
     setCustomPositions(prev => ({
       ...prev,
-      [slotId]: { gridX, gridY }
+      [activeDraggingSlotId]: coords
     }));
-  };
+  }, [activeDraggingSlotId, screenToPitchCoords]);
 
-  const handlePointerUp = (e, slotId) => {
-    if (activeDraggingSlotId === slotId) {
+  const handlePointerUp = useCallback((e) => {
+    if (activeDraggingSlotId) {
       setActiveDraggingSlotId(null);
-      try {
-        e.target.releasePointerCapture(e.pointerId);
-      } catch (err) {
-        // Safe release fallback
-      }
     }
-  };
+  }, [activeDraggingSlotId]);
+
+  // Attach global pointer up to handle edge cases
+  useEffect(() => {
+    if (activeDraggingSlotId) {
+      const onUp = () => setActiveDraggingSlotId(null);
+      window.addEventListener('pointerup', onUp);
+      return () => window.removeEventListener('pointerup', onUp);
+    }
+  }, [activeDraggingSlotId]);
 
   const resetPositions = () => {
     setCustomPositions({});
@@ -71,6 +112,49 @@ export const PitchBoardView = ({
     p.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
     p.season.toLowerCase().includes(searchFilter.toLowerCase())
   );
+
+  // 3D Pitch grass stripe rendering
+  const renderPitchGrass = () => {
+    if (pitchPerspective === '3D') {
+      return (
+        <>
+          {/* Realistic grass stripes */}
+          {Array.from({ length: 14 }).map((_, i) => (
+            <div key={`stripe-${i}`} style={{
+              position: 'absolute',
+              top: `${(i / 14) * 100}%`,
+              left: 0,
+              right: 0,
+              height: `${100 / 14}%`,
+              background: i % 2 === 0
+                ? 'linear-gradient(180deg, #1a8a3e 0%, #15803d 100%)'
+                : 'linear-gradient(180deg, #15803d 0%, #12713a 100%)',
+              pointerEvents: 'none'
+            }} />
+          ))}
+          {/* Stadium shadow gradient from top */}
+          <div style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            height: '40%',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 100%)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }} />
+          {/* Vignette bottom shadow */}
+          <div style={{
+            position: 'absolute',
+            bottom: 0, left: 0, right: 0,
+            height: '25%',
+            background: 'linear-gradient(0deg, rgba(0,0,0,0.2) 0%, transparent 100%)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }} />
+        </>
+      );
+    }
+    return null;
+  };
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
@@ -91,7 +175,7 @@ export const PitchBoardView = ({
                 padding: '8px 12px',
                 background: 'var(--bg-tertiary)',
                 border: '1px solid var(--glass-border)',
-                color: '#fff',
+                color: 'var(--text-main)',
                 fontWeight: 700,
                 borderRadius: '8px',
                 fontSize: '0.9rem',
@@ -128,17 +212,31 @@ export const PitchBoardView = ({
                 padding: '6px 10px',
                 borderRadius: '8px',
                 border: '1px solid var(--glass-border)',
-                background: 'var(--bg-tertiary)',
-                color: 'var(--text-muted)',
+                background: Object.keys(customPositions).length > 0 ? 'rgba(239,68,68,0.15)' : 'var(--bg-tertiary)',
+                color: Object.keys(customPositions).length > 0 ? '#ef4444' : 'var(--text-muted)',
                 fontWeight: 700,
                 fontSize: '0.75rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px'
+                gap: '4px',
+                transition: 'all 0.2s ease'
               }}
             >
-              <RefreshCw size={12} /> Đặt lại Vị trí
+              <RotateCcw size={12} /> Đặt lại Vị trí
+              {Object.keys(customPositions).length > 0 && (
+                <span style={{
+                  padding: '1px 6px',
+                  borderRadius: '8px',
+                  background: '#ef4444',
+                  color: '#fff',
+                  fontSize: '0.65rem',
+                  fontWeight: 800,
+                  marginLeft: '2px'
+                }}>
+                  {Object.keys(customPositions).length}
+                </span>
+              )}
             </button>
 
             {/* 2D / 3D Pitch Toggle Button (v2.0.0 Feature) */}
@@ -157,7 +255,7 @@ export const PitchBoardView = ({
                   transition: 'all 0.2s ease'
                 }}
               >
-                📐 Sân 2D Phẳng
+                📐 Sân 2D
               </button>
               <button
                 onClick={() => setPitchPerspective('3D')}
@@ -173,7 +271,7 @@ export const PitchBoardView = ({
                   transition: 'all 0.2s ease'
                 }}
               >
-                🏟️ Sân 3D Perspective
+                🏟️ Sân 3D
               </button>
             </div>
 
@@ -185,7 +283,7 @@ export const PitchBoardView = ({
                 padding: '8px 12px',
                 background: 'var(--bg-tertiary)',
                 border: '1px solid var(--glass-border)',
-                color: '#fff',
+                color: 'var(--text-main)',
                 borderRadius: '8px',
                 fontWeight: 700,
                 fontSize: '0.85rem'
@@ -204,7 +302,7 @@ export const PitchBoardView = ({
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-tertiary)', padding: '10px 16px', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Move size={14} color="var(--accent-gold)" />
-            <span>Chuột nhấn & giữ bất kỳ vị trí nút cầu thủ để <strong>KÉO THẢ TỰ DO</strong> tạo Sơ đồ Độc Lạ.</span>
+            <span>Nhấn giữ & kéo cầu thủ để <strong style={{ color: 'var(--accent-gold)' }}>KÉO THẢ TỰ DO</strong> trên sân.</span>
           </div>
           <div style={{ fontSize: '0.75rem', fontWeight: 800, color: gameMode === 'MANAGER_SIM' ? '#10b981' : '#3b82f6', display: 'flex', alignItems: 'center', gap: '4px' }}>
             {gameMode === 'MANAGER_SIM' ? <Cpu size={14} /> : <Gamepad2 size={14} />}
@@ -212,94 +310,163 @@ export const PitchBoardView = ({
           </div>
         </div>
 
-        {/* Pitch Canvas Container (Wrapper for 3D Perspective Depth) */}
-        <div className={pitchPerspective === '3D' ? 'pitch-perspective-wrapper' : ''}>
+        {/* ====== PITCH CANVAS CONTAINER ====== */}
+        <div 
+          className={pitchPerspective === '3D' ? 'pitch-perspective-wrapper' : ''}
+          style={{
+            // Extra padding at bottom for 3D effect depth
+            paddingBottom: pitchPerspective === '3D' ? '40px' : '0'
+          }}
+        >
           
           <div
             ref={pitchRef}
             className={pitchPerspective === '3D' ? 'pitch-canvas-3d' : ''}
+            onPointerMove={handlePitchPointerMove}
+            onPointerUp={handlePointerUp}
             style={{
               position: 'relative',
               width: '100%',
               height: '560px',
-              borderRadius: '20px',
+              borderRadius: pitchPerspective === '3D' ? '4px' : '20px',
               background: pitchPerspective === '3D'
-                ? 'repeating-linear-gradient(0deg, #15803d, #15803d 40px, #166534 40px, #166534 80px)'
+                ? '#15803d'
                 : 'repeating-linear-gradient(0deg, #166534, #166534 40px, #14532d 40px, #14532d 80px)',
-              border: pitchPerspective === '3D' ? '4px solid rgba(255,255,255,0.4)' : '2px solid var(--glass-border)',
+              border: pitchPerspective === '3D' 
+                ? '3px solid rgba(255,255,255,0.6)' 
+                : '2px solid var(--glass-border)',
               overflow: 'hidden',
-              boxShadow: pitchPerspective === '3D' ? 'inset 0 0 100px rgba(0,0,0,0.6)' : 'none',
-              touchAction: 'none'
+              touchAction: 'none',
+              cursor: activeDraggingSlotId ? 'grabbing' : 'default',
+              userSelect: 'none'
             }}
           >
-            {/* Pitch Marking Lines */}
+            {/* Realistic grass stripes for 3D mode */}
+            {renderPitchGrass()}
+
+            {/* ========= PITCH MARKING LINES ========= */}
             {/* Outer Border Line */}
-            <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', bottom: '15px', border: '2px solid var(--pitch-line)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', bottom: '15px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, pointerEvents: 'none', zIndex: 2 }} />
             
             {/* Halfway Line */}
-            <div style={{ position: 'absolute', top: '50%', left: '15px', right: '15px', height: '2px', background: 'var(--pitch-line)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '50%', left: '15px', right: '15px', height: '2px', background: pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)', pointerEvents: 'none', zIndex: 2 }} />
             
             {/* Center Circle */}
-            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120px', height: '120px', border: '2px solid var(--pitch-line)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '8px', height: '8px', background: 'var(--pitch-line)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '120px', height: '120px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '8px', height: '8px', background: pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)', borderRadius: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 2 }} />
 
             {/* Top Goal Penalty Box */}
-            <div style={{ position: 'absolute', top: '15px', left: '25%', right: '25%', height: '100px', border: '2px solid var(--pitch-line)', borderTop: 'none', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', top: '15px', left: '35%', right: '35%', height: '40px', border: '2px solid var(--pitch-line)', borderTop: 'none', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '15px', left: '25%', right: '25%', height: '100px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, borderTop: 'none', pointerEvents: 'none', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '15px', left: '35%', right: '35%', height: '40px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, borderTop: 'none', pointerEvents: 'none', zIndex: 2 }} />
 
             {/* Bottom Goal Penalty Box */}
-            <div style={{ position: 'absolute', bottom: '15px', left: '25%', right: '25%', height: '100px', border: '2px solid var(--pitch-line)', borderBottom: 'none', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', bottom: '15px', left: '35%', right: '35%', height: '40px', border: '2px solid var(--pitch-line)', borderBottom: 'none', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', bottom: '15px', left: '25%', right: '25%', height: '100px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, borderBottom: 'none', pointerEvents: 'none', zIndex: 2 }} />
+            <div style={{ position: 'absolute', bottom: '15px', left: '35%', right: '35%', height: '40px', border: `2px solid ${pitchPerspective === '3D' ? 'rgba(255,255,255,0.55)' : 'var(--pitch-line)'}`, borderBottom: 'none', pointerEvents: 'none', zIndex: 2 }} />
 
-            {/* 11 Player Interactive Slot Nodes on Pitch */}
+            {/* Goal Nets (3D mode enhancement) */}
+            {pitchPerspective === '3D' && (
+              <>
+                {/* Top goal net */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '38%',
+                  right: '38%',
+                  height: '16px',
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%)',
+                  borderLeft: '2px solid rgba(255,255,255,0.4)',
+                  borderRight: '2px solid rgba(255,255,255,0.4)',
+                  borderTop: '2px solid rgba(255,255,255,0.4)',
+                  pointerEvents: 'none',
+                  zIndex: 2
+                }} />
+                {/* Bottom goal net */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: '38%',
+                  right: '38%',
+                  height: '16px',
+                  background: 'linear-gradient(0deg, rgba(255,255,255,0.2) 0%, transparent 100%)',
+                  borderLeft: '2px solid rgba(255,255,255,0.4)',
+                  borderRight: '2px solid rgba(255,255,255,0.4)',
+                  borderBottom: '2px solid rgba(255,255,255,0.4)',
+                  pointerEvents: 'none',
+                  zIndex: 2
+                }} />
+              </>
+            )}
+
+            {/* ========= 11 PLAYER INTERACTIVE SLOT NODES ========= */}
             {activePositions.map((pos) => {
-              const player = slotMap[pos.id];
-              const customPos = customPositions[pos.id];
+              const player = slotMap[pos.role];
+              const customPos = customPositions[pos.role];
               const posX = customPos ? customPos.gridX : pos.gridX;
               const posY = customPos ? customPos.gridY : pos.gridY;
-              const isDragging = activeDraggingSlotId === pos.id;
+              const isDragging = activeDraggingSlotId === pos.role;
+              const hasCustomPos = !!customPos;
 
               return (
                 <div
-                  key={pos.id}
-                  onPointerDown={(e) => handlePointerDown(e, pos.id)}
-                  onPointerMove={(e) => handlePointerMove(e, pos.id)}
-                  onPointerUp={(e) => handlePointerUp(e, pos.id)}
-                  className={pitchPerspective === '3D' ? 'pitch-node-counter-3d' : ''}
+                  key={pos.role}
+                  onPointerDown={(e) => handlePointerDown(e, pos.role)}
                   style={{
                     position: 'absolute',
                     left: `${posX}%`,
                     top: `${posY}%`,
-                    transform: pitchPerspective === '3D'
-                      ? 'translate(-50%, -50%) rotateX(-48deg) translateZ(15px)'
-                      : 'translate(-50%, -50%)',
+                    transform: 'translate(-50%, -50%)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     cursor: isDragging ? 'grabbing' : 'grab',
                     zIndex: isDragging ? 50 : 10,
                     userSelect: 'none',
-                    touchAction: 'none'
+                    touchAction: 'none',
+                    // Smooth position transition only when NOT dragging
+                    transition: isDragging ? 'none' : 'left 0.2s ease, top 0.2s ease',
+                    // 3D mode: lift nodes above pitch with perspective counter-rotation
+                    ...(pitchPerspective === '3D' ? {
+                      transformStyle: 'preserve-3d',
+                      filter: isDragging ? 'drop-shadow(0 8px 20px rgba(59,130,246,0.6))' : 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))'
+                    } : {})
                   }}
                 >
+                  {/* Player shadow on pitch (3D mode) */}
+                  {pitchPerspective === '3D' && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-8px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '36px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      background: 'radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%)',
+                      pointerEvents: 'none',
+                      zIndex: -1
+                    }} />
+                  )}
+
                   {/* Node Circle Counter */}
                   <div
                     onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedSlotForAdd(pos);
+                      if (!isDragging) {
+                        e.stopPropagation();
+                        setSelectedSlotForAdd(pos);
+                      }
                     }}
                     style={{
-                      width: '48px',
-                      height: '48px',
+                      width: '50px',
+                      height: '50px',
                       borderRadius: '50%',
                       background: player
-                        ? 'linear-gradient(135deg, #1e293b, #0f172a)'
-                        : 'rgba(0,0,0,0.75)',
+                        ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
+                        : 'radial-gradient(circle, rgba(30,30,30,0.9) 0%, rgba(0,0,0,0.95) 100%)',
                       border: isDragging
                         ? '3px solid #3b82f6'
                         : player
                         ? '2.5px solid var(--accent-gold)'
-                        : '2.5px dashed rgba(255,255,255,0.7)',
+                        : '2.5px dashed rgba(255,255,255,0.6)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -307,42 +474,48 @@ export const PitchBoardView = ({
                       fontWeight: 800,
                       fontSize: '0.85rem',
                       boxShadow: isDragging
-                        ? '0 0 20px #3b82f6'
-                        : '0 6px 14px rgba(0,0,0,0.6)',
+                        ? '0 0 25px rgba(59,130,246,0.7), 0 0 50px rgba(59,130,246,0.3)'
+                        : player 
+                          ? '0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)' 
+                          : '0 4px 12px rgba(0,0,0,0.4)',
                       position: 'relative',
-                      transition: 'transform 0.15s ease'
+                      transform: isDragging ? 'scale(1.15)' : 'scale(1)',
+                      transition: 'transform 0.15s ease, box-shadow 0.2s ease'
                     }}
                   >
                     {player ? (
-                      <span style={{ color: 'var(--accent-gold)' }}>{player.salary}</span>
+                      <span style={{ color: 'var(--accent-gold)', textShadow: '0 0 8px rgba(245,158,11,0.3)' }}>{player.salary}</span>
                     ) : (
-                      <Plus size={20} />
+                      <Plus size={20} strokeWidth={2.5} />
                     )}
 
                     {player && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          removePlayerFromSlot(pos.id);
+                          e.preventDefault();
+                          removePlayerFromSlot(pos.role);
                         }}
+                        onPointerDown={(e) => e.stopPropagation()}
                         style={{
                           position: 'absolute',
-                          top: '-4px',
-                          right: '-4px',
+                          top: '-6px',
+                          right: '-6px',
                           width: '20px',
                           height: '20px',
                           borderRadius: '50%',
                           background: 'var(--salary-alert)',
-                          border: 'none',
+                          border: '2px solid rgba(0,0,0,0.3)',
                           color: '#fff',
                           cursor: 'pointer',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.4)'
+                          boxShadow: '0 2px 8px rgba(239,68,68,0.4)',
+                          zIndex: 60
                         }}
                       >
-                        <Trash2 size={11} />
+                        <Trash2 size={10} />
                       </button>
                     )}
                   </div>
@@ -352,13 +525,16 @@ export const PitchBoardView = ({
                     marginTop: '4px',
                     padding: '2px 8px',
                     borderRadius: '12px',
-                    background: 'rgba(15, 23, 42, 0.9)',
-                    border: '1px solid var(--glass-border)',
+                    background: 'rgba(15, 23, 42, 0.92)',
+                    border: hasCustomPos ? '1px solid rgba(59,130,246,0.5)' : '1px solid var(--glass-border)',
                     color: player ? '#fff' : 'var(--accent-gold)',
                     fontWeight: 800,
-                    fontSize: '0.72rem',
+                    fontSize: '0.7rem',
                     whiteSpace: 'nowrap',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.5)'
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.5)',
+                    maxWidth: '120px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
                   }}>
                     {pos.role} {player ? `• ${player.name}` : ''}
                   </div>
@@ -373,15 +549,22 @@ export const PitchBoardView = ({
 
       </div>
 
-      {/* Right Column: Player Selection Drawer & Database Quick Pick */}
+      {/* ====== RIGHT COLUMN: Player Selection Drawer ====== */}
       <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         
         <div>
           <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0 }}>
-            {selectedSlotForAdd ? `CHỌN CẦU THỦ CHO VỊ TRÍ: ${selectedSlotForAdd.role}` : 'DANH MỤC CẦU THỦ QUỐC DÂN'}
+            {selectedSlotForAdd ? (
+              <>
+                CHỌN CẦU THỦ CHO: <span style={{ color: 'var(--accent-gold)' }}>{selectedSlotForAdd.role}</span>
+              </>
+            ) : 'DANH MỤC CẦU THỦ QUỐC DÂN'}
           </h3>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            Dữ liệu đồng bộ vn.fifaaddict.com mới nhất
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+            {selectedSlotForAdd 
+              ? `Nhấn vào cầu thủ bên dưới để gán vào vị trí ${selectedSlotForAdd.role}` 
+              : 'Nhấn vào nút + trên sân để chọn vị trí trước'
+            }
           </p>
         </div>
 
@@ -394,19 +577,51 @@ export const PitchBoardView = ({
             padding: '8px 12px',
             background: 'var(--bg-tertiary)',
             border: '1px solid var(--glass-border)',
-            color: '#fff',
+            color: 'var(--text-main)',
             borderRadius: '8px',
             fontSize: '0.8rem'
           }}
         />
 
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '440px' }}>
+        {/* Selected slot indicator */}
+        {selectedSlotForAdd && (
+          <div style={{
+            padding: '8px 12px',
+            borderRadius: '8px',
+            background: 'rgba(59,130,246,0.1)',
+            border: '1px solid rgba(59,130,246,0.3)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#3b82f6' }}>
+              📍 Đang chọn cho: {selectedSlotForAdd.role} ({selectedSlotForAdd.label})
+            </span>
+            <button
+              onClick={() => setSelectedSlotForAdd(null)}
+              style={{
+                padding: '2px 8px',
+                borderRadius: '6px',
+                border: 'none',
+                background: 'rgba(239,68,68,0.2)',
+                color: '#ef4444',
+                cursor: 'pointer',
+                fontSize: '0.7rem',
+                fontWeight: 700
+              }}
+            >
+              Huỷ
+            </button>
+          </div>
+        )}
+
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '440px' }}>
           {filteredPlayers.map(p => (
             <div
               key={p.id}
               onClick={() => {
                 if (selectedSlotForAdd) {
-                  assignPlayerToSlot(selectedSlotForAdd.id, p);
+                  assignPlayerToSlot(selectedSlotForAdd.role, p);
                   setSelectedSlotForAdd(null);
                 }
               }}
@@ -417,7 +632,9 @@ export const PitchBoardView = ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                opacity: selectedSlotForAdd ? 1 : 0.7,
+                borderColor: selectedSlotForAdd ? 'var(--glass-border)' : 'transparent'
               }}
             >
               <div>

@@ -11,6 +11,7 @@ import './styles/theme.css';
 
 export function App() {
   const [activeTab, setActiveTab] = useState('pitch'); // 'pitch' | 'aicoach' | 'squads' | 'playerdb' | 'meta'
+  const [gameMode, setGameMode] = useState('RANKED_1V1'); // 'RANKED_1V1' | 'MANAGER_SIM'
 
   const {
     systemConfig,
@@ -36,7 +37,7 @@ export function App() {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
       {/* Header Bar */}
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} gameMode={gameMode} setGameMode={setGameMode} />
 
       {/* Main Body Container */}
       <main style={{ flex: 1, padding: '0 24px 32px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -63,6 +64,7 @@ export function App() {
             totalSalary={totalSalary}
             isSalaryExceeded={isSalaryExceeded}
             systemConfig={systemConfig}
+            gameMode={gameMode}
           />
         )}
 
@@ -99,7 +101,7 @@ export function App() {
         fontSize: '0.8rem',
         color: 'var(--text-muted)'
       }}>
-        FCO Meta Tactics & AI Solution Engine v1.0.0 (APPROVED) • Lương trần hiện tại: {systemConfig.CURRENT_SALARY_CAP} BP
+        FCO Meta Tactics & AI Solution Engine v2.0.0 (APPROVED) • Lương trần hiện tại: {systemConfig.CURRENT_SALARY_CAP} BP
       </footer>
 
     </div>
