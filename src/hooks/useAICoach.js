@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getUnifiedAICoachRecommendation, getAIBudgetScoutRecommendation, diagnoseTacticsProblem } from '../services/aiCoachService';
+import { aiCoachService } from '../services/aiCoachService';
 
 export const useAICoach = () => {
   const [aiLoading, setAiLoading] = useState(false);
@@ -8,14 +8,14 @@ export const useAICoach = () => {
   const [diagnosisResult, setDiagnosisResult] = useState(null);
   const [aiError, setAiError] = useState(null);
 
-  const requestUnifiedAdvisor = async (squadPlayers, currentSalaryCap) => {
+  const requestUnifiedAdvisor = async (squadPlayers, currentSalaryCap = 300, gameMode = 'RANKED_1V1') => {
     setAiLoading(true);
     setAiError(null);
     try {
-      const res = await getUnifiedAICoachRecommendation(squadPlayers, currentSalaryCap);
-      setAiResult(res);
+      const data = await aiCoachService.getUnifiedRecommendationV2(squadPlayers, currentSalaryCap, gameMode);
+      setAiResult(data);
     } catch (err) {
-      setAiError(err.message);
+      setAiError('Lỗi kết nối AI Coach: ' + err.message);
     } finally {
       setAiLoading(false);
     }
@@ -25,23 +25,23 @@ export const useAICoach = () => {
     setAiLoading(true);
     setAiError(null);
     try {
-      const res = await getAIBudgetScoutRecommendation(scoutParams);
-      setScoutResults(res);
+      const data = await aiCoachService.getBudgetScoutV2(scoutParams);
+      setScoutResults(data);
     } catch (err) {
-      setAiError(err.message);
+      setAiError('Lỗi AI Budget Scout: ' + err.message);
     } finally {
       setAiLoading(false);
     }
   };
 
-  const requestDiagnosis = async (problemText) => {
+  const requestDiagnosis = async (symptomText) => {
     setAiLoading(true);
     setAiError(null);
     try {
-      const res = await diagnoseTacticsProblem(problemText);
-      setDiagnosisResult(res);
+      const data = await aiCoachService.getDiagnosis(symptomText);
+      setDiagnosisResult(data);
     } catch (err) {
-      setAiError(err.message);
+      setAiError('Lỗi AI Diagnosis: ' + err.message);
     } finally {
       setAiLoading(false);
     }

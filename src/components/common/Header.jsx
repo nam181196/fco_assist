@@ -1,150 +1,206 @@
 import React from 'react';
-import { Sun, Moon, Shield, Sparkles, Database, Users, Settings } from 'lucide-react';
+import { Sun, Moon, ShieldAlert, Sparkles, Gamepad2, Cpu } from 'lucide-react';
 import { useThemeStore } from '../../hooks/useThemeStore';
 
-export const Header = ({ activeTab, setActiveTab }) => {
+export const Header = ({ activeTab, setActiveTab, gameMode, setGameMode }) => {
   const { theme, toggleTheme } = useThemeStore();
 
   return (
-    <header className="glass-panel" style={{ margin: '16px 24px', padding: '16px 24px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+    <header style={{
+      background: 'var(--bg-secondary)',
+      borderBottom: '1px solid var(--glass-border)',
+      padding: '16px 24px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      boxShadow: 'var(--shadow-main)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100
+    }}>
+      
+      {/* Brand Logo & Title */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{
+          width: '40px',
+          height: '40px',
+          borderRadius: '10px',
+          background: 'linear-gradient(135deg, var(--accent-gold), #f59e0b)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#000',
+          fontWeight: 900,
+          fontSize: '1.2rem',
+          boxShadow: '0 0 15px rgba(245, 158, 11, 0.4)'
+        }}>
+          FCO
+        </div>
+        <div>
+          <h1 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            FCO META TACTICS & AI ENGINE
+            <span style={{ fontSize: '0.65rem', padding: '2px 8px', borderRadius: '12px', background: 'var(--accent-gold)', color: '#000', fontWeight: 800 }}>
+              v2.0.0 APPROVED
+            </span>
+          </h1>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0 }}>
+            Hệ Thống Tối Ưu Chiến Thuật & Trợ Lý AI Cá Nhân Hoá FC Online
+          </p>
+        </div>
+      </div>
 
-        {/* Brand Logo & Name */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '44px',
-            height: '44px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%)',
+      {/* Main Navigation Tabs */}
+      <nav style={{ display: 'flex', gap: '8px', background: 'var(--bg-tertiary)', padding: '4px', borderRadius: '10px' }}>
+        <button
+          onClick={() => setActiveTab('pitch')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeTab === 'pitch' ? 'var(--accent-gold)' : 'transparent',
+            color: activeTab === 'pitch' ? '#000' : 'var(--text-main)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          ⚽ Sân Bóng 2D/3D
+        </button>
+
+        <button
+          onClick={() => setActiveTab('aicoach')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeTab === 'aicoach' ? 'var(--accent-gold)' : 'transparent',
+            color: activeTab === 'aicoach' ? '#000' : 'var(--text-main)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)'
-          }}>
-            <Shield size={26} />
-          </div>
-          <div>
-            <h1 style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '0.5px' }}>
-              FCO META <span style={{ color: 'var(--accent-gold)' }}>AI ASSISTANT</span>
-            </h1>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              Trợ lý Chiến thuật & AI Solution Engine Chuẩn Meta 2026
-            </p>
-          </div>
+            gap: '6px'
+          }}
+        >
+          <Sparkles size={16} /> Console AI Coach
+        </button>
+
+        <button
+          onClick={() => setActiveTab('playerdb')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeTab === 'playerdb' ? 'var(--accent-gold)' : 'transparent',
+            color: activeTab === 'playerdb' ? '#000' : 'var(--text-main)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          🔍 FIFAAddict Live DB
+        </button>
+
+        <button
+          onClick={() => setActiveTab('meta')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeTab === 'meta' ? 'var(--accent-gold)' : 'transparent',
+            color: activeTab === 'meta' ? '#000' : 'var(--text-main)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          📚 Meta Library
+        </button>
+      </nav>
+
+      {/* Right Controls: Game Mode Selector (1v1 vs GLXH) & Theme Switcher */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        
+        {/* Game Mode Selector (v2.0.0 Feature) */}
+        <div style={{
+          display: 'flex',
+          background: 'var(--bg-tertiary)',
+          padding: '3px',
+          borderRadius: '10px',
+          border: '1px solid var(--glass-border)'
+        }}>
+          <button
+            onClick={() => setGameMode && setGameMode('RANKED_1V1')}
+            title="Tối ưu chiến thuật cho Chế độ Đấu Xếp Hạng 1v1"
+            style={{
+              padding: '6px 12px',
+              borderRadius: '8px',
+              border: 'none',
+              background: gameMode === 'RANKED_1V1' ? '#3b82f6' : 'transparent',
+              color: gameMode === 'RANKED_1V1' ? '#fff' : 'var(--text-muted)',
+              fontWeight: 700,
+              fontSize: '0.75rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Gamepad2 size={14} /> Xếp Hạng 1v1
+          </button>
+
+          <button
+            onClick={() => setGameMode && setGameMode('MANAGER_SIM')}
+            title="Tối ưu chiến thuật tự động cho Chế độ Đấu Giả Lập GLXH"
+            style={{
+              padding: '6px 12px',
+              borderRadius: '8px',
+              border: 'none',
+              background: gameMode === 'MANAGER_SIM' ? '#10b981' : 'transparent',
+              color: gameMode === 'MANAGER_SIM' ? '#000' : 'var(--text-muted)',
+              fontWeight: 800,
+              fontSize: '0.75rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Cpu size={14} /> Giả Lập GLXH
+          </button>
         </div>
 
-        {/* Navigation Tabs */}
-        <nav style={{ display: 'flex', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px', borderRadius: '12px' }}>
-          <button
-            onClick={() => setActiveTab('pitch')}
-            className={`btn-tab ${activeTab === 'pitch' ? 'active' : ''}`}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              background: activeTab === 'pitch' ? 'var(--accent-gold)' : 'transparent',
-              color: activeTab === 'pitch' ? '#000' : 'var(--text-main)',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s'
-            }}
-          >
-            <Shield size={16} /> Sân bóng 2D & Squad
-          </button>
-
-          <button
-            onClick={() => setActiveTab('aicoach')}
-            className={`btn-tab ${activeTab === 'aicoach' ? 'active' : ''}`}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              background: activeTab === 'aicoach' ? 'var(--accent-gold)' : 'transparent',
-              color: activeTab === 'aicoach' ? '#000' : 'var(--text-main)',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s'
-            }}
-          >
-            <Sparkles size={16} /> FCO AI Coach Console
-          </button>
-
-          <button
-            onClick={() => setActiveTab('playerdb')}
-            className={`btn-tab ${activeTab === 'playerdb' ? 'active' : ''}`}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              background: activeTab === 'playerdb' ? 'var(--accent-gold)' : 'transparent',
-              color: activeTab === 'playerdb' ? '#000' : 'var(--text-main)',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s'
-            }}
-          >
-            <Users size={16} /> Tra cứu & So sánh Cầu thủ
-          </button>
-
-          <button
-            onClick={() => setActiveTab('meta')}
-            className={`btn-tab ${activeTab === 'meta' ? 'active' : ''}`}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              background: activeTab === 'meta' ? 'var(--accent-gold)' : 'transparent',
-              color: activeTab === 'meta' ? '#000' : 'var(--text-main)',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s'
-            }}
-          >
-            <Database size={16} /> Thư viện Meta
-          </button>
-        </nav>
-
-        {/* Dual Theme Switcher Toggle */}
+        {/* Dual Theme Switcher (Dark / Light) */}
         <button
           onClick={toggleTheme}
           style={{
-            padding: '10px 16px',
-            borderRadius: '12px',
+            padding: '8px 12px',
+            borderRadius: '10px',
             border: '1px solid var(--glass-border)',
-            background: 'var(--bg-secondary)',
-            color: 'var(--text-main)',
+            background: 'var(--bg-tertiary)',
+            color: 'var(--accent-gold)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            fontWeight: 600,
-            fontSize: '0.875rem',
+            fontWeight: 700,
+            fontSize: '0.8rem',
             transition: 'all 0.2s ease'
           }}
-          title="Chuyển đổi giao diện Sáng / Tối (Light Mode / Dark Mode)"
         >
-          {theme === 'dark' ? <Sun size={18} color="#f59e0b" /> : <Moon size={18} color="#3b82f6" />}
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
 
       </div>
+
     </header>
   );
 };

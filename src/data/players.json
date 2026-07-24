@@ -1,259 +1,98 @@
 [
   {
-    "id": "p_shevchenko_24ucl",
+    "id": "p_shevchenko_icontm",
     "name": "A. Shevchenko",
-    "season": "24UCL",
+    "season": "ICON TM",
     "salary": 28,
-    "mainPositions": [
-      "ST",
-      "CF"
-    ],
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_shevchenko_icontm",
+    "mainPositions": ["ST", "CF"],
     "heightCm": 183,
-    "weightKg": 78,
     "weakFoot": "5/5",
-    "keyMetaTraits": [
-      "Sút xa ZD bá đạo",
-      "Tốc độ xé nách",
-      "Dứt điểm hiểm hóc",
-      "Hai chân 5-5"
-    ],
-    "estimatedBpRange": "35B - 50B BP",
-    "bpPriceMin": 35000000000,
-    "bpPriceMax": 50000000000
+    "keyMetaTraits": ["Sút xa ZD bá đạo", "Tốc độ xé nách", "Dứt điểm hai chân 5-5"],
+    "estimatedBpRange": "350B - 500B BP"
   },
   {
-    "id": "p_gullit_icon",
+    "id": "p_gullit_icontm",
     "name": "Ruud Gullit",
-    "season": "ICON",
+    "season": "ICON TM",
     "salary": 29,
-    "mainPositions": [
-      "CAM",
-      "CM",
-      "ST",
-      "CDM"
-    ],
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_gullit_icontm",
+    "mainPositions": ["CAM", "CF", "CM", "ST"],
     "heightCm": 191,
-    "weightKg": 88,
     "weakFoot": "5/5",
-    "keyMetaTraits": [
-      "Sút xa ZD bá đạo",
-      "Tranh chấp thể chất",
-      "Chuyên gia kiến tạo",
-      "Hai chân 5-5"
-    ],
-    "estimatedBpRange": "60B - 90B BP",
-    "bpPriceMin": 60000000000,
-    "bpPriceMax": 90000000000
+    "keyMetaTraits": ["Quái vật thể chất", "Không chiến hủy diệt", "Sút xa ZD bá đạo"],
+    "estimatedBpRange": "600B - 900B BP"
   },
   {
-    "id": "p_ronaldo_icon",
+    "id": "p_ronaldo_24ts",
     "name": "Ronaldo Nazário",
-    "season": "ICON",
-    "salary": 29,
-    "mainPositions": [
-      "ST"
-    ],
+    "season": "24TS",
+    "salary": 28,
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_ronaldo_24ts",
+    "mainPositions": ["ST"],
     "heightCm": 183,
-    "weightKg": 78,
     "weakFoot": "5/5",
-    "keyMetaTraits": [
-      "Rê bóng qua người",
-      "Dứt điểm thần tốc",
-      "Sút xa ZD",
-      "Hai chân 5-5"
-    ],
-    "estimatedBpRange": "80B - 120B BP",
-    "bpPriceMin": 80000000000,
-    "bpPriceMax": 120000000000
+    "keyMetaTraits": ["Bứt tốc kinh hoàng", "Rê bóng 5 sao", "Dứt điểm hiểm hóc"],
+    "estimatedBpRange": "200B - 350B BP"
+  },
+  {
+    "id": "p_cr7_eu24",
+    "name": "Cristiano Ronaldo",
+    "season": "EU24",
+    "salary": 27,
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_cr7_eu24",
+    "mainPositions": ["ST", "LW"],
+    "heightCm": 187,
+    "weakFoot": "4/5",
+    "keyMetaTraits": ["Đánh đầu khét tiếng", "Sút căng như kẻ chỉ", "Bản lĩnh trận cầu lớn"],
+    "estimatedBpRange": "150B - 250B BP"
   },
   {
     "id": "p_ballack_cu",
     "name": "Michael Ballack",
     "season": "CU",
-    "salary": 27,
-    "mainPositions": [
-      "CM",
-      "CDM",
-      "CAM"
-    ],
+    "salary": 26,
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_ballack_cu",
+    "mainPositions": ["CAM", "CM", "CDM"],
     "heightCm": 188,
-    "weightKg": 85,
     "weakFoot": "5/5",
-    "keyMetaTraits": [
-      "Sút xa nã đại bác",
-      "Tranh chấp thể lực",
-      "Đánh đầu mạnh mẽ"
-    ],
-    "estimatedBpRange": "25B - 40B BP",
-    "bpPriceMin": 25000000000,
-    "bpPriceMax": 40000000000
+    "keyMetaTraits": ["Nã đại bác tầm xa", "Tranh chấp nảy lửa", "Chuyền dài kiến tạo"],
+    "estimatedBpRange": "80B - 130B BP"
   },
   {
-    "id": "p_rodri_24ucl",
-    "name": "Rodri",
+    "id": "p_bellingham_24ucl",
+    "name": "Jude Bellingham",
     "season": "24UCL",
     "salary": 26,
-    "mainPositions": [
-      "CDM",
-      "CM"
-    ],
-    "heightCm": 191,
-    "weightKg": 82,
-    "weakFoot": "4/5",
-    "keyMetaTraits": [
-      "Bọc lót trung lộ",
-      "Chuyền dài chuẩn xác",
-      "Cắt bóng thông minh"
-    ],
-    "estimatedBpRange": "15B - 25B BP",
-    "bpPriceMin": 15000000000,
-    "bpPriceMax": 25000000000
-  },
-  {
-    "id": "p_son_24ucl",
-    "name": "Son Heung Min",
-    "season": "24UCL",
-    "salary": 27,
-    "mainPositions": [
-      "LW",
-      "ST",
-      "LM"
-    ],
-    "heightCm": 183,
-    "weightKg": 78,
-    "weakFoot": "5/5",
-    "keyMetaTraits": [
-      "Cứa lòng ZD ảo diệu",
-      "Tốc độ dốc cánh",
-      "Hai chân 5-5"
-    ],
-    "estimatedBpRange": "20B - 35B BP",
-    "bpPriceMin": 20000000000,
-    "bpPriceMax": 35000000000
-  },
-  {
-    "id": "p_bale_icon",
-    "name": "Gareth Bale",
-    "season": "ICON",
-    "salary": 28,
-    "mainPositions": [
-      "RW",
-      "RM",
-      "ST"
-    ],
-    "heightCm": 185,
-    "weightKg": 81,
-    "weakFoot": "4/5",
-    "keyMetaTraits": [
-      "Tốc độ xé gió",
-      "Sút xa ZD uy lực",
-      "Tạt bóng xoáy"
-    ],
-    "estimatedBpRange": "40B - 65B BP",
-    "bpPriceMin": 40000000000,
-    "bpPriceMax": 65000000000
-  },
-  {
-    "id": "p_van_dijk_24ucl",
-    "name": "Virgil van Dijk",
-    "season": "24UCL",
-    "salary": 27,
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 193,
-    "weightKg": 92,
-    "weakFoot": "4/5",
-    "keyMetaTraits": [
-      "Cơ bắp trâu bò",
-      "Tắc bóng chính xác",
-      "Khả năng không chiến"
-    ],
-    "estimatedBpRange": "18B - 30B BP",
-    "bpPriceMin": 18000000000,
-    "bpPriceMax": 30000000000
-  },
-  {
-    "id": "p_maldini_icon",
-    "name": "Paolo Maldini",
-    "season": "ICON",
-    "salary": 28,
-    "mainPositions": [
-      "CB",
-      "LB"
-    ],
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_bellingham_24ucl",
+    "mainPositions": ["CAM", "CM"],
     "heightCm": 186,
-    "weightKg": 77,
     "weakFoot": "4/5",
-    "keyMetaTraits": [
-      "Xoạc bóng thần tốc",
-      "Đọc tình huống xuất sắc",
-      "Độ dẻo dai cao"
-    ],
-    "estimatedBpRange": "50B - 80B BP",
-    "bpPriceMin": 50000000000,
-    "bpPriceMax": 80000000000
+    "keyMetaTraits": ["Thể lực không giới hạn", "Xâm nhập vòng cấm ghi bàn", "Tranh chấp toàn diện"],
+    "estimatedBpRange": "100B - 180B BP"
   },
   {
-    "id": "p_theo_24ucl",
-    "name": "Theo Hernández",
-    "season": "24UCL",
-    "salary": 25,
-    "mainPositions": [
-      "LB",
-      "LWB"
-    ],
-    "heightCm": 184,
-    "weightKg": 81,
+    "id": "p_van_dijk_24ts",
+    "name": "Virgil van Dijk",
+    "season": "24TS",
+    "salary": 27,
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_van_dijk_24ts",
+    "mainPositions": ["CB"],
+    "heightCm": 193,
     "weakFoot": "3/5",
-    "keyMetaTraits": [
-      "Hậu vệ cánh tốc độ nhất",
-      "Tấn công bám biên",
-      "Tranh chấp tốt"
-    ],
-    "estimatedBpRange": "10B - 18B BP",
-    "bpPriceMin": 10000000000,
-    "bpPriceMax": 18000000000
+    "keyMetaTraits": ["Hòn đá tảng phòng ngự", "Bọc lót dọn dẹp", "Không chiến vô đối"],
+    "estimatedBpRange": "180B - 280B BP"
   },
   {
-    "id": "p_walker_24ucl",
-    "name": "Kyle Walker",
-    "season": "24UCL",
-    "salary": 25,
-    "mainPositions": [
-      "RB",
-      "CB"
-    ],
-    "heightCm": 183,
-    "weightKg": 83,
-    "weakFoot": "3/5",
-    "keyMetaTraits": [
-      "Tốc độ hồi vệ",
-      "Tắc bóng mạnh mẽ",
-      "Thể lực dồi dào"
-    ],
-    "estimatedBpRange": "8B - 15B BP",
-    "bpPriceMin": 8000000000,
-    "bpPriceMax": 15000000000
-  },
-  {
-    "id": "p_courtois_24ucl",
+    "id": "p_courtois_eu24",
     "name": "Thibaut Courtois",
-    "season": "24UCL",
-    "salary": 24,
-    "mainPositions": [
-      "GK"
-    ],
+    "season": "EU24",
+    "salary": 18,
+    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/p_courtois_eu24",
+    "mainPositions": ["GK"],
     "heightCm": 200,
-    "weightKg": 96,
     "weakFoot": "3/5",
-    "keyMetaTraits": [
-      "Thủ môn cao 2m bối cảnh ZD",
-      "Cản phá phản xạ",
-      "Bắt bóng bổng tốt"
-    ],
-    "estimatedBpRange": "5B - 12B BP",
-    "bpPriceMin": 5000000000,
-    "bpPriceMax": 12000000000
+    "keyMetaTraits": ["Sải tay dài phản xạ", "Cân mọi pha ZD góc xa", "Ra vào làm chủ vòng cấm"],
+    "estimatedBpRange": "30B - 60B BP"
   }
 ]
