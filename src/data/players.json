@@ -1,0 +1,259 @@
+[
+  {
+    "id": "p_shevchenko_24ucl",
+    "name": "A. Shevchenko",
+    "season": "24UCL",
+    "salary": 28,
+    "mainPositions": [
+      "ST",
+      "CF"
+    ],
+    "heightCm": 183,
+    "weightKg": 78,
+    "weakFoot": "5/5",
+    "keyMetaTraits": [
+      "Sút xa ZD bá đạo",
+      "Tốc độ xé nách",
+      "Dứt điểm hiểm hóc",
+      "Hai chân 5-5"
+    ],
+    "estimatedBpRange": "35B - 50B BP",
+    "bpPriceMin": 35000000000,
+    "bpPriceMax": 50000000000
+  },
+  {
+    "id": "p_gullit_icon",
+    "name": "Ruud Gullit",
+    "season": "ICON",
+    "salary": 29,
+    "mainPositions": [
+      "CAM",
+      "CM",
+      "ST",
+      "CDM"
+    ],
+    "heightCm": 191,
+    "weightKg": 88,
+    "weakFoot": "5/5",
+    "keyMetaTraits": [
+      "Sút xa ZD bá đạo",
+      "Tranh chấp thể chất",
+      "Chuyên gia kiến tạo",
+      "Hai chân 5-5"
+    ],
+    "estimatedBpRange": "60B - 90B BP",
+    "bpPriceMin": 60000000000,
+    "bpPriceMax": 90000000000
+  },
+  {
+    "id": "p_ronaldo_icon",
+    "name": "Ronaldo Nazário",
+    "season": "ICON",
+    "salary": 29,
+    "mainPositions": [
+      "ST"
+    ],
+    "heightCm": 183,
+    "weightKg": 78,
+    "weakFoot": "5/5",
+    "keyMetaTraits": [
+      "Rê bóng qua người",
+      "Dứt điểm thần tốc",
+      "Sút xa ZD",
+      "Hai chân 5-5"
+    ],
+    "estimatedBpRange": "80B - 120B BP",
+    "bpPriceMin": 80000000000,
+    "bpPriceMax": 120000000000
+  },
+  {
+    "id": "p_ballack_cu",
+    "name": "Michael Ballack",
+    "season": "CU",
+    "salary": 27,
+    "mainPositions": [
+      "CM",
+      "CDM",
+      "CAM"
+    ],
+    "heightCm": 188,
+    "weightKg": 85,
+    "weakFoot": "5/5",
+    "keyMetaTraits": [
+      "Sút xa nã đại bác",
+      "Tranh chấp thể lực",
+      "Đánh đầu mạnh mẽ"
+    ],
+    "estimatedBpRange": "25B - 40B BP",
+    "bpPriceMin": 25000000000,
+    "bpPriceMax": 40000000000
+  },
+  {
+    "id": "p_rodri_24ucl",
+    "name": "Rodri",
+    "season": "24UCL",
+    "salary": 26,
+    "mainPositions": [
+      "CDM",
+      "CM"
+    ],
+    "heightCm": 191,
+    "weightKg": 82,
+    "weakFoot": "4/5",
+    "keyMetaTraits": [
+      "Bọc lót trung lộ",
+      "Chuyền dài chuẩn xác",
+      "Cắt bóng thông minh"
+    ],
+    "estimatedBpRange": "15B - 25B BP",
+    "bpPriceMin": 15000000000,
+    "bpPriceMax": 25000000000
+  },
+  {
+    "id": "p_son_24ucl",
+    "name": "Son Heung Min",
+    "season": "24UCL",
+    "salary": 27,
+    "mainPositions": [
+      "LW",
+      "ST",
+      "LM"
+    ],
+    "heightCm": 183,
+    "weightKg": 78,
+    "weakFoot": "5/5",
+    "keyMetaTraits": [
+      "Cứa lòng ZD ảo diệu",
+      "Tốc độ dốc cánh",
+      "Hai chân 5-5"
+    ],
+    "estimatedBpRange": "20B - 35B BP",
+    "bpPriceMin": 20000000000,
+    "bpPriceMax": 35000000000
+  },
+  {
+    "id": "p_bale_icon",
+    "name": "Gareth Bale",
+    "season": "ICON",
+    "salary": 28,
+    "mainPositions": [
+      "RW",
+      "RM",
+      "ST"
+    ],
+    "heightCm": 185,
+    "weightKg": 81,
+    "weakFoot": "4/5",
+    "keyMetaTraits": [
+      "Tốc độ xé gió",
+      "Sút xa ZD uy lực",
+      "Tạt bóng xoáy"
+    ],
+    "estimatedBpRange": "40B - 65B BP",
+    "bpPriceMin": 40000000000,
+    "bpPriceMax": 65000000000
+  },
+  {
+    "id": "p_van_dijk_24ucl",
+    "name": "Virgil van Dijk",
+    "season": "24UCL",
+    "salary": 27,
+    "mainPositions": [
+      "CB"
+    ],
+    "heightCm": 193,
+    "weightKg": 92,
+    "weakFoot": "4/5",
+    "keyMetaTraits": [
+      "Cơ bắp trâu bò",
+      "Tắc bóng chính xác",
+      "Khả năng không chiến"
+    ],
+    "estimatedBpRange": "18B - 30B BP",
+    "bpPriceMin": 18000000000,
+    "bpPriceMax": 30000000000
+  },
+  {
+    "id": "p_maldini_icon",
+    "name": "Paolo Maldini",
+    "season": "ICON",
+    "salary": 28,
+    "mainPositions": [
+      "CB",
+      "LB"
+    ],
+    "heightCm": 186,
+    "weightKg": 77,
+    "weakFoot": "4/5",
+    "keyMetaTraits": [
+      "Xoạc bóng thần tốc",
+      "Đọc tình huống xuất sắc",
+      "Độ dẻo dai cao"
+    ],
+    "estimatedBpRange": "50B - 80B BP",
+    "bpPriceMin": 50000000000,
+    "bpPriceMax": 80000000000
+  },
+  {
+    "id": "p_theo_24ucl",
+    "name": "Theo Hernández",
+    "season": "24UCL",
+    "salary": 25,
+    "mainPositions": [
+      "LB",
+      "LWB"
+    ],
+    "heightCm": 184,
+    "weightKg": 81,
+    "weakFoot": "3/5",
+    "keyMetaTraits": [
+      "Hậu vệ cánh tốc độ nhất",
+      "Tấn công bám biên",
+      "Tranh chấp tốt"
+    ],
+    "estimatedBpRange": "10B - 18B BP",
+    "bpPriceMin": 10000000000,
+    "bpPriceMax": 18000000000
+  },
+  {
+    "id": "p_walker_24ucl",
+    "name": "Kyle Walker",
+    "season": "24UCL",
+    "salary": 25,
+    "mainPositions": [
+      "RB",
+      "CB"
+    ],
+    "heightCm": 183,
+    "weightKg": 83,
+    "weakFoot": "3/5",
+    "keyMetaTraits": [
+      "Tốc độ hồi vệ",
+      "Tắc bóng mạnh mẽ",
+      "Thể lực dồi dào"
+    ],
+    "estimatedBpRange": "8B - 15B BP",
+    "bpPriceMin": 8000000000,
+    "bpPriceMax": 15000000000
+  },
+  {
+    "id": "p_courtois_24ucl",
+    "name": "Thibaut Courtois",
+    "season": "24UCL",
+    "salary": 24,
+    "mainPositions": [
+      "GK"
+    ],
+    "heightCm": 200,
+    "weightKg": 96,
+    "weakFoot": "3/5",
+    "keyMetaTraits": [
+      "Thủ môn cao 2m bối cảnh ZD",
+      "Cản phá phản xạ",
+      "Bắt bóng bổng tốt"
+    ],
+    "estimatedBpRange": "5B - 12B BP",
+    "bpPriceMin": 5000000000,
+    "bpPriceMax": 12000000000
+  }
+]

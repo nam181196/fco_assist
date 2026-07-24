@@ -1,0 +1,41 @@
+[
+  {
+    "ruleId": "RULE_DEF_FLANK_EXPOSED",
+    "symptomKeywords": ["hở cánh", "lủng cánh", "hông", "phản công biên"],
+    "rootCauses": [
+      "Hậu vệ cánh LB/RB dâng quá cao khi tấn công",
+      "Độ rộng phòng ngự (Defensive Width) quá hẹp",
+      "Tiền vệ phòng ngự (CDM) không hỗ trợ dạt biên bọc lót"
+    ],
+    "recommendedActions": {
+      "teamTacticAdjustments": {
+        "defensiveWidth": 55,
+        "defensiveLine": "Cover"
+      },
+      "individualInstructionAdjustments": {
+        "LB": "AS1 (Giữ vị trí khi tấn công)",
+        "RB": "AS1 (Giữ vị trí khi tấn công)",
+        "CDM": "DB2 (Bọc lót dạt biên)"
+      }
+    }
+  },
+  {
+    "ruleId": "RULE_OFFENSE_BLOCKED",
+    "symptomKeywords": ["bế tắc", "không chạy chỗ", "thiếu người", "không sút được"],
+    "rootCauses": [
+      "Tốc độ xây dựng lối chơi quá chậm",
+      "Lệnh cá nhân Tiền đạo ST để mặc định không xẻ nách",
+      "Tiền vệ tấn công CAM không dâng cao nhập vòng cấm"
+    ],
+    "recommendedActions": {
+      "teamTacticAdjustments": {
+        "buildUpSpeed": 72,
+        "chanceShooting": 75
+      },
+      "individualInstructionAdjustments": {
+        "ST": "AR1 (Chạy chỗ xé nách) + SR1 (Xẻ nách)",
+        "CAM": "SC1 (Vào vòng cấm khi tạt) + PF1 (Tự do di chuyển)"
+      }
+    }
+  }
+]

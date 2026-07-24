@@ -1,0 +1,83 @@
+[
+  {
+    "tacticId": "tac_4231_tikitaka_pro",
+    "formationId": "4-2-3-1",
+    "title": "4-2-3-1 Kiểm soát bóng Ban bật Trung lộ",
+    "playstyle": "Tiki-taka",
+    "author": "Top 1 Ranker Meta Patch 2026",
+    "teamTactic": {
+      "buildUpSpeed": 65,
+      "passingStyle": 40,
+      "positioning": "Organized",
+      "chanceCrossing": 50,
+      "chanceShooting": 70,
+      "defensivePressure": 55,
+      "defensiveAggression": 60,
+      "defensiveWidth": 45,
+      "defensiveLine": "Cover"
+    },
+    "individualInstructions": {
+      "ST": ["AR1 (Chạy chỗ xé nách)", "SR1 (Xẻ nách)", "DP1 (Tích cực áp sát)"],
+      "CAM": ["PF1 (Tự do di chuyển)", "SC1 (Vào vòng cấm khi tạt)"],
+      "LAM": ["CC1 (Chạy cắt mặt)", "DS1 (Hỗ trợ phòng ngự)"],
+      "RAM": ["CC1 (Chạy cắt mặt)", "DS1 (Hỗ trợ phòng ngự)"],
+      "LDM": ["AS1 (Giữ vị trí khi tấn công)", "DB2 (Bọc lót trung lộ)"],
+      "RDM": ["AS1 (Giữ vị trí khi tấn công)", "DB2 (Bọc lót trung lộ)"],
+      "LB": ["AS1 (Giữ vị trí khi tấn công)"],
+      "RB": ["AS1 (Giữ vị trí khi tấn công)"]
+    }
+  },
+  {
+    "tacticId": "tac_4123_cross_head",
+    "formationId": "4-1-2-3",
+    "title": "4-1-2-3 Tạt cánh đánh đầu & Sút xa ZD",
+    "playstyle": "Cross-Head",
+    "author": "Top Rank World Class FCO",
+    "teamTactic": {
+      "buildUpSpeed": 75,
+      "passingStyle": 60,
+      "positioning": "Free",
+      "chanceCrossing": 85,
+      "chanceShooting": 75,
+      "defensivePressure": 60,
+      "defensiveAggression": 65,
+      "defensiveWidth": 65,
+      "defensiveLine": "Cover"
+    },
+    "individualInstructions": {
+      "ST": ["AR2 (Tập trung ở trung tâm)", "SC2 (Chờ ở ngoài vòng cấm để ZD)"],
+      "LW": ["SR2 (Bám biên tạt bóng)", "SC1 (Vào vòng cấm khi tạt)"],
+      "RW": ["SR2 (Bám biên tạt bóng)", "SC1 (Vào vòng cấm khi tạt)"],
+      "LCM": ["PF1 (Tự do di chuyển)", "SC1 (Dâng cao dứt điểm)"],
+      "RCM": ["PF1 (Tự do di chuyển)", "SC1 (Dâng cao dứt điểm)"],
+      "CDM": ["AS1 (Giữ vị trí khi tấn công)", "DB2 (Bọc lót)"]
+    }
+  },
+  {
+    "tacticId": "tac_523_counter_press",
+    "formationId": "5-2-3",
+    "title": "5-2-3 Thép Chống Phản Công & Chọc Khe QW",
+    "playstyle": "Counter-Attack",
+    "author": "Chuyên Gia Đua Top Thách Đấu",
+    "teamTactic": {
+      "buildUpSpeed": 85,
+      "passingStyle": 70,
+      "positioning": "Organized",
+      "chanceCrossing": 60,
+      "chanceShooting": 65,
+      "defensivePressure": 40,
+      "defensiveAggression": 70,
+      "defensiveWidth": 35,
+      "defensiveLine": "Cover"
+    },
+    "individualInstructions": {
+      "ST": ["AR1 (Chạy chỗ xé nách)", "SR1 (Đột phá)"],
+      "LW": ["AR1 (Chạy chỗ xé nách)", "CC1 (Cắt mặt sút xa ZD)"],
+      "RW": ["AR1 (Chạy chỗ xé nách)", "CC1 (Cắt mặt sút xa ZD)"],
+      "LCM": ["AS1 (Giữ vị trí)", "DB2 (Bọc lót)"],
+      "RCM": ["AS1 (Giữ vị trí)", "DB2 (Bọc lót)"],
+      "LWB": ["AR1 (Nhô cao dốc cánh)"],
+      "RWB": ["AR1 (Nhô cao dốc cánh)"]
+    }
+  }
+]

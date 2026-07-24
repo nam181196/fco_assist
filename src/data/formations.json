@@ -1,0 +1,74 @@
+[
+  {
+    "id": "4-2-3-1",
+    "name": "4-2-3-1 Đội hình Quốc Dân Meta 2026",
+    "category": "Balanced",
+    "positions": [
+      { "role": "ST", "label": "Tiền đạo cắm", "gridX": 50, "gridY": 12 },
+      { "role": "LAM", "label": "Tiền vệ cánh trái", "gridX": 22, "gridY": 28 },
+      { "role": "CAM", "label": "Tiền vệ tấn công", "gridX": 50, "gridY": 28 },
+      { "role": "RAM", "label": "Tiền vệ cánh phải", "gridX": 78, "gridY": 28 },
+      { "role": "LDM", "label": "Tiền vệ phòng ngự trái", "gridX": 35, "gridY": 55 },
+      { "role": "RDM", "label": "Tiền vệ phòng ngự phải", "gridX": 65, "gridY": 55 },
+      { "role": "LB", "label": "Hậu vệ cánh trái", "gridX": 15, "gridY": 75 },
+      { "role": "LCB", "label": "Trung vệ trái", "gridX": 38, "gridY": 78 },
+      { "role": "RCB", "label": "Trung vệ phải", "gridX": 62, "gridY": 78 },
+      { "role": "RB", "label": "Hậu vệ cánh phải", "gridX": 85, "gridY": 75 },
+      { "role": "GK", "label": "Thủ môn", "gridX": 50, "gridY": 92 }
+    ]
+  },
+  {
+    "id": "4-1-2-3",
+    "name": "4-1-2-3 Tấn công Ban Bật Tạt Cánh",
+    "category": "Attacking",
+    "positions": [
+      { "role": "LW", "label": "Tiền đạo cánh trái", "gridX": 20, "gridY": 15 },
+      { "role": "ST", "label": "Tiền đạo cắm", "gridX": 50, "gridY": 12 },
+      { "role": "RW", "label": "Tiền đạo cánh phải", "gridX": 80, "gridY": 15 },
+      { "role": "LCM", "label": "Tiền vệ trung tâm trái", "gridX": 35, "gridY": 40 },
+      { "role": "RCM", "label": "Tiền vệ trung tâm phải", "gridX": 65, "gridY": 40 },
+      { "role": "CDM", "label": "Tiền vệ mỏ neo", "gridX": 50, "gridY": 60 },
+      { "role": "LB", "label": "Hậu vệ cánh trái", "gridX": 15, "gridY": 75 },
+      { "role": "LCB", "label": "Trung vệ trái", "gridX": 38, "gridY": 78 },
+      { "role": "RCB", "label": "Trung vệ phải", "gridX": 62, "gridY": 78 },
+      { "role": "RB", "label": "Hậu vệ cánh phải", "gridX": 85, "gridY": 75 },
+      { "role": "GK", "label": "Thủ môn", "gridX": 50, "gridY": 92 }
+    ]
+  },
+  {
+    "id": "5-2-3",
+    "name": "5-2-3 Phòng Ngự Phản Công Chặt Chẽ",
+    "category": "Defensive",
+    "positions": [
+      { "role": "LW", "label": "Tiền đạo cánh trái", "gridX": 22, "gridY": 16 },
+      { "role": "ST", "label": "Tiền đạo cắm", "gridX": 50, "gridY": 12 },
+      { "role": "RW", "label": "Tiền đạo cánh phải", "gridX": 78, "gridY": 16 },
+      { "role": "LCM", "label": "Tiền vệ trung tâm trái", "gridX": 38, "gridY": 45 },
+      { "role": "RCM", "label": "Tiền vệ trung tâm phải", "gridX": 62, "gridY": 45 },
+      { "role": "LWB", "label": "Hậu vệ biên trái", "gridX": 12, "gridY": 68 },
+      { "role": "LCB", "label": "Trung vệ lệch trái", "gridX": 30, "gridY": 78 },
+      { "role": "CB", "label": "Trung vệ thòng", "gridX": 50, "gridY": 80 },
+      { "role": "RCB", "label": "Trung vệ lệch phải", "gridX": 70, "gridY": 78 },
+      { "role": "RWB", "label": "Hậu vệ biên phải", "gridX": 88, "gridY": 68 },
+      { "role": "GK", "label": "Thủ môn", "gridX": 50, "gridY": 92 }
+    ]
+  },
+  {
+    "id": "4-2-2-2",
+    "name": "4-2-2-2 Song Tiền Đạo Cực Ép Sân",
+    "category": "Attacking",
+    "positions": [
+      { "role": "LS", "label": "Tiền đạo trái", "gridX": 38, "gridY": 12 },
+      { "role": "RS", "label": "Tiền đạo phải", "gridX": 62, "gridY": 12 },
+      { "role": "LAM", "label": "Tiền vệ tấn công trái", "gridX": 25, "gridY": 32 },
+      { "role": "RAM", "label": "Tiền vệ tấn công phải", "gridX": 75, "gridY": 32 },
+      { "role": "LDM", "label": "Tiền vệ phòng ngự trái", "gridX": 38, "gridY": 58 },
+      { "role": "RDM", "label": "Tiền vệ phòng ngự phải", "gridX": 62, "gridY": 58 },
+      { "role": "LB", "label": "Hậu vệ cánh trái", "gridX": 15, "gridY": 75 },
+      { "role": "LCB", "label": "Trung vệ trái", "gridX": 38, "gridY": 78 },
+      { "role": "RCB", "label": "Trung vệ phải", "gridX": 62, "gridY": 78 },
+      { "role": "RB", "label": "Hậu vệ cánh phải", "gridX": 85, "gridY": 75 },
+      { "role": "GK", "label": "Thủ môn", "gridX": 50, "gridY": 92 }
+    ]
+  }
+]
