@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2, Move, RotateCcw } from 'lucide-react';
 import playersData from '../../data/players.json';
 import formationsData from '../../data/formations.json';
@@ -21,11 +21,11 @@ export const PitchBoardView = ({
   const [pitchPerspective, setPitchPerspective] = useState('2D'); // '2D' | '3D'
   const [selectedSlotForAdd, setSelectedSlotForAdd] = useState(null);
   const [searchFilter, setSearchFilter] = useState('');
+  const [seasonFilter, setSeasonFilter] = useState('');
   
   // Free Dragging State
   const [activeDraggingSlotId, setActiveDraggingSlotId] = useState(null);
   const [customPositions, setCustomPositions] = useState({}); // { role: { gridX, gridY } }
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
   const pitchRef = useRef(null);
   const activePositions = currentFormation?.positions || [];
@@ -108,10 +108,22 @@ export const PitchBoardView = ({
     setCustomPositions({});
   };
 
-  const filteredPlayers = playersData.filter(p =>
-    p.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-    p.season.toLowerCase().includes(searchFilter.toLowerCase())
-  );
+  // Unique seasons for filter dropdown
+  const uniqueSeasons = useMemo(() => {
+    const seasons = [...new Set(playersData.map(p => p.season))];
+    return seasons.sort();
+  }, []);
+
+  const filteredPlayers = useMemo(() => {
+    return playersData.filter(p => {
+      const matchesSearch = searchFilter === '' || 
+        p.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        p.season.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        (p.seasonFullName && p.seasonFullName.toLowerCase().includes(searchFilter.toLowerCase()));
+      const matchesSeason = seasonFilter === '' || p.season === seasonFilter;
+      return matchesSearch && matchesSeason;
+    });
+  }, [searchFilter, seasonFilter]);
 
   // 3D Pitch grass stripe rendering
   const renderPitchGrass = () => {
@@ -550,7 +562,7 @@ export const PitchBoardView = ({
       </div>
 
       {/* ====== RIGHT COLUMN: Player Selection Drawer ====== */}
-      <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
         
         <div>
           <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0 }}>
@@ -560,28 +572,57 @@ export const PitchBoardView = ({
               </>
             ) : 'DANH MỤC CẦU THỦ QUỐC DÂN'}
           </h3>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+          <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>
             {selectedSlotForAdd 
               ? `Nhấn vào cầu thủ bên dưới để gán vào vị trí ${selectedSlotForAdd.role}` 
-              : 'Nhấn vào nút + trên sân để chọn vị trí trước'
+              : 'Dữ liệu đồng bộ vn.fifaaddict.com • Nhấn + trên sân để chọn vị trí'
             }
           </p>
         </div>
 
-        <input
-          type="text"
-          value={searchFilter}
-          onChange={(e) => setSearchFilter(e.target.value)}
-          placeholder="Tìm tên cầu thủ hoặc mùa giải..."
-          style={{
-            padding: '8px 12px',
-            background: 'var(--bg-tertiary)',
-            border: '1px solid var(--glass-border)',
-            color: 'var(--text-main)',
-            borderRadius: '8px',
-            fontSize: '0.8rem'
-          }}
-        />
+        {/* Search + Season Filter Row */}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <input
+            type="text"
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+            placeholder="Tìm tên cầu thủ..."
+            style={{
+              flex: 1,
+              padding: '8px 10px',
+              background: 'var(--bg-tertiary)',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-main)',
+              borderRadius: '8px',
+              fontSize: '0.78rem'
+            }}
+          />
+          <select
+            value={seasonFilter}
+            onChange={(e) => setSeasonFilter(e.target.value)}
+            style={{
+              padding: '8px 6px',
+              background: 'var(--bg-tertiary)',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-main)',
+              borderRadius: '8px',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              minWidth: '100px'
+            }}
+          >
+            <option value="">Tất cả mùa</option>
+            {uniqueSeasons.map(s => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Stats bar */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)', padding: '0 4px' }}>
+          <span>{filteredPlayers.length} cầu thủ</span>
+          <span>{uniqueSeasons.length} mùa giải</span>
+        </div>
 
         {/* Selected slot indicator */}
         {selectedSlotForAdd && (
@@ -594,8 +635,8 @@ export const PitchBoardView = ({
             justifyContent: 'space-between',
             alignItems: 'center'
           }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#3b82f6' }}>
-              📍 Đang chọn cho: {selectedSlotForAdd.role} ({selectedSlotForAdd.label})
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#3b82f6' }}>
+              📍 {selectedSlotForAdd.role} ({selectedSlotForAdd.label})
             </span>
             <button
               onClick={() => setSelectedSlotForAdd(null)}
@@ -615,7 +656,7 @@ export const PitchBoardView = ({
           </div>
         )}
 
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '440px' }}>
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '500px' }}>
           {filteredPlayers.map(p => (
             <div
               key={p.id}
@@ -627,35 +668,89 @@ export const PitchBoardView = ({
               }}
               className="glass-card"
               style={{
-                padding: '12px',
+                padding: '10px 12px',
                 cursor: selectedSlotForAdd ? 'pointer' : 'default',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 transition: 'all 0.2s ease',
                 opacity: selectedSlotForAdd ? 1 : 0.7,
-                borderColor: selectedSlotForAdd ? 'var(--glass-border)' : 'transparent'
+                borderColor: selectedSlotForAdd ? 'var(--glass-border)' : 'transparent',
+                gap: '8px'
               }}
             >
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem' }}>
-                  {p.name} <span style={{ color: 'var(--accent-gold)' }}>[{p.season}]</span>
+              {/* OVR Badge */}
+              <div style={{
+                minWidth: '36px',
+                height: '36px',
+                borderRadius: '8px',
+                background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#000',
+                fontWeight: 900,
+                fontSize: '0.8rem',
+                flexShrink: 0
+              }}>
+                {p.ovr || '?'}
+              </div>
+              
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {p.name}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  {p.mainPositions.join('/')} • {p.heightCm}cm • Chân {p.weakFoot}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
+                  <span style={{
+                    padding: '1px 6px',
+                    borderRadius: '6px',
+                    background: 'rgba(245,158,11,0.15)',
+                    color: 'var(--accent-gold)',
+                    fontWeight: 800,
+                    fontSize: '0.65rem',
+                    border: '1px solid rgba(245,158,11,0.3)'
+                  }}>
+                    {p.season}
+                  </span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                    {p.mainPositions.join('/')}
+                  </span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                    {p.heightCm}cm
+                  </span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                    WF{p.weakFoot}
+                  </span>
                 </div>
               </div>
-              <div style={{ textAlign: 'right' }}>
+
+              <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
                 <span style={{
                   padding: '2px 8px',
                   borderRadius: '10px',
                   background: 'var(--bg-tertiary)',
                   color: 'var(--accent-gold)',
                   fontWeight: 800,
-                  fontSize: '0.75rem'
+                  fontSize: '0.72rem'
                 }}>
-                  Lương {p.salary}
+                  💰 {p.salary}
                 </span>
+                {p.fifaAddictUrl && p.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
+                  <a
+                    href={p.fifaAddictUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      fontSize: '0.6rem',
+                      color: '#06b6d4',
+                      textDecoration: 'none',
+                      fontWeight: 600
+                    }}
+                  >
+                    FIFAAddict ↗
+                  </a>
+                )}
               </div>
             </div>
           ))}
