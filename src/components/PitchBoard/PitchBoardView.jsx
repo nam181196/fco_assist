@@ -70,49 +70,54 @@ export const PitchBoardView = ({
   }, [pitchPerspective]);
 
   // --- Pointer Event Handlers for Free Drag-and-Drop ---
+  const pointerStartRef = useRef(null);
+  const isDraggingActiveRef = useRef(false);
+
   const handlePointerDown = useCallback((e, role) => {
-    e.preventDefault();
     e.stopPropagation();
-    setActiveDraggingSlotId(role);
-    
-    // Capture pointer for smooth tracking outside element bounds
-    e.currentTarget.setPointerCapture(e.pointerId);
+    pointerStartRef.current = { x: e.clientX, y: e.clientY, role };
+    isDraggingActiveRef.current = false;
   }, []);
 
   const dragRafRef = useRef(null);
 
   // We handle pointer move on the PITCH container with rAF throttle for 60fps smoothness
   const handlePitchPointerMove = useCallback((e) => {
-    if (!activeDraggingSlotId || !pitchRef.current) return;
-    e.preventDefault();
+    if (!pointerStartRef.current || !pitchRef.current) return;
     
-    const clientX = e.clientX;
-    const clientY = e.clientY;
+    const dist = Math.hypot(e.clientX - pointerStartRef.current.x, e.clientY - pointerStartRef.current.y);
+    if (dist > 5) {
+      isDraggingActiveRef.current = true;
+      const draggingRole = pointerStartRef.current.role;
+      setActiveDraggingSlotId(draggingRole);
 
-    if (dragRafRef.current) {
-      cancelAnimationFrame(dragRafRef.current);
+      const clientX = e.clientX;
+      const clientY = e.clientY;
+
+      if (dragRafRef.current) {
+        cancelAnimationFrame(dragRafRef.current);
+      }
+
+      dragRafRef.current = requestAnimationFrame(() => {
+        const coords = screenToPitchCoords(clientX, clientY);
+        const dynamicRole = calculatePositionFromCoords(coords.gridX, coords.gridY);
+        
+        setCustomPositions(prev => ({
+          ...prev,
+          [draggingRole]: {
+            ...coords,
+            dynamicRole
+          }
+        }));
+      });
     }
-
-    dragRafRef.current = requestAnimationFrame(() => {
-      const coords = screenToPitchCoords(clientX, clientY);
-      const dynamicRole = calculatePositionFromCoords(coords.gridX, coords.gridY);
-      
-      setCustomPositions(prev => ({
-        ...prev,
-        [activeDraggingSlotId]: {
-          ...coords,
-          dynamicRole
-        }
-      }));
-    });
-  }, [activeDraggingSlotId, screenToPitchCoords]);
+  }, [screenToPitchCoords]);
 
   const handlePointerUp = useCallback((e) => {
-    if (activeDraggingSlotId) {
-      if (dragRafRef.current) cancelAnimationFrame(dragRafRef.current);
-      setActiveDraggingSlotId(null);
-    }
-  }, [activeDraggingSlotId]);
+    if (dragRafRef.current) cancelAnimationFrame(dragRafRef.current);
+    pointerStartRef.current = null;
+    setActiveDraggingSlotId(null);
+  }, []);
 
   // Attach global pointer up to handle edge cases
   useEffect(() => {
@@ -524,8 +529,8 @@ export const PitchBoardView = ({
                   {/* Node Circle Counter / Player Face Avatar */}
                   <div
                     onClick={(e) => {
-                      if (!isDragging) {
-                        e.stopPropagation();
+                      e.stopPropagation();
+                      if (!isDraggingActiveRef.current) {
                         setSelectedSlotForAdd(pos);
                       }
                     }}
@@ -606,8 +611,16 @@ export const PitchBoardView = ({
                   </div>
 
                   {/* Role Badge & Player Name */}
-                  <div style={{
-                    marginTop: '4px',
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!isDraggingActiveRef.current) {
+                        setSelectedSlotForAdd(pos);
+                      }
+                    }}
+                    style={{
+                      cursor: 'pointer',
+                      marginTop: '4px',
                     padding: '2px 8px',
                     borderRadius: '12px',
                     background: 'rgba(15, 23, 42, 0.92)',
