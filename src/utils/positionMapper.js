@@ -2,7 +2,7 @@
  * Smart Pitch Position Coordinate Mapper (Full-Spectrum 27 Positions for FO4/FCO)
  * @param {Number} gridX - Horizontal percentage coordinate (0% Left -> 100% Right)
  * @param {Number} gridY - Vertical percentage coordinate (0% Opponent Box -> 100% Home Box)
- * @returns {String} FO4 Position Code (GK, SW, CB, LWB, CDM, CAM, LAM, ST, LS...)
+ * @returns {String} FO4 Position Code (GK, SW, CB, LWB, CDM, CAM, LAM, ST, CF, LS...)
  */
 export function calculatePositionFromCoords(gridX, gridY) {
   const x = Number(gridX) || 50;
@@ -42,7 +42,7 @@ export function calculatePositionFromCoords(gridX, gridY) {
   }
 
   // 6. Attacking Midfield & Wings (20% <= Y < 35%)
-  if (y >= 20) {
+  if (y >= 27) {
     if (x <= 18) return 'LM';
     if (x <= 38) return 'LAM';
     if (x <= 62) return 'CAM';
@@ -50,11 +50,16 @@ export function calculatePositionFromCoords(gridX, gridY) {
     return 'RM';
   }
 
-  // 7. Forward Line & Strikers (Y < 20%)
+  // 7. Center Forward (CF) Zone (18% <= Y < 27% in central channel)
+  if (y >= 18 && y < 27 && x >= 36 && x <= 64) {
+    return 'CF';
+  }
+
+  // 8. Forward Line & Strikers (Y < 27%)
   if (x <= 22) return 'LW';
   if (x <= 36) return 'LF';
-  if (x <= 48) return 'LS';
-  if (x <= 52) return 'ST';
+  if (x <= 46) return 'LS';
+  if (x <= 54) return 'ST';
   if (x <= 64) return 'RS';
   if (x <= 78) return 'RF';
   return 'RW';

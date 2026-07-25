@@ -5,6 +5,7 @@ import formationsData from '../../data/formations.json';
 import { calculatePositionFromCoords } from '../../utils/positionMapper';
 import { getPlayerAvatarUrl, getSeasonBadgeUrl } from '../../utils/assetResolver';
 import { getCanonicalPlayerName } from '../../hooks/useSquadStore';
+import { FifaCardComponent } from '../FifaCardComponent';
 
 export const PitchBoardView = ({
   currentFormation,
@@ -738,7 +739,7 @@ export const PitchBoardView = ({
             </button>
           </div>
 
-          <div onScroll={handleDrawerScroll} style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px' }}>
+          <div onScroll={handleDrawerScroll} style={{ flex: 1, overflowY: 'auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', maxHeight: '520px', paddingRight: '4px' }}>
             {displayedDrawerPlayers.map(p => {
               // Unique Player Rule Check across active squad slots
               const normName = getCanonicalPlayerName(p.name);
@@ -755,8 +756,13 @@ export const PitchBoardView = ({
               }
 
               return (
-                <div
+                <FifaCardComponent
                   key={p.id}
+                  player={p}
+                  position={selectedSlotForAdd?.role}
+                  size="md"
+                  isDisabled={isDuplicateOnOtherSlot}
+                  disabledReason={isDuplicateOnOtherSlot ? `Đã có bản thể [${duplicateSeason}]` : ''}
                   onClick={() => {
                     if (isDuplicateOnOtherSlot) {
                       alert(`Cầu thủ '${p.name}' đã có mặt trong đội hình (Thẻ ${duplicateSeason})! Một đội hình không thể dùng 2 thẻ cùng tên.`);
@@ -767,85 +773,7 @@ export const PitchBoardView = ({
                       setSelectedSlotForAdd(null);
                     }
                   }}
-                  className="glass-card"
-                  style={{
-                    padding: '10px 12px',
-                    cursor: isDuplicateOnOtherSlot ? 'not-allowed' : 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    transition: 'all 0.2s ease',
-                    opacity: isDuplicateOnOtherSlot ? 0.45 : 1,
-                    borderColor: isDuplicateOnOtherSlot ? 'rgba(239,68,68,0.4)' : 'var(--glass-border)',
-                    background: isDuplicateOnOtherSlot ? 'rgba(239,68,68,0.05)' : 'var(--bg-tertiary)',
-                    gap: '8px'
-                  }}
-                >
-                  {/* Player Avatar */}
-                  <img 
-                    src={getPlayerAvatarUrl(p)} 
-                    alt={p.name}
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                    style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--glass-border)', flexShrink: 0 }}
-                  />
-
-                  {/* OVR Badge */}
-                  <div style={{
-                    minWidth: '32px',
-                    height: '32px',
-                    borderRadius: '6px',
-                    background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#000',
-                    fontWeight: 900,
-                    fontSize: '0.78rem',
-                    flexShrink: 0
-                  }}>
-                    {p.ovr || '?'}
-                  </div>
-                  
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 800, fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {p.name} <span style={{ color: 'var(--accent-gold)', fontSize: '0.75rem' }}>[{p.season}]</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
-                      <span style={{
-                        padding: '1px 6px',
-                        borderRadius: '6px',
-                        background: 'rgba(245,158,11,0.15)',
-                        color: 'var(--accent-gold)',
-                        fontWeight: 800,
-                        fontSize: '0.65rem',
-                        border: '1px solid rgba(245,158,11,0.3)'
-                      }}>
-                        {p.season}
-                      </span>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                        {p.mainPositions.join('/')}
-                      </span>
-                      {isDuplicateOnOtherSlot && (
-                        <span style={{ fontSize: '0.62rem', color: '#ef4444', background: 'rgba(239,68,68,0.15)', padding: '1px 4px', borderRadius: '4px', border: '1px solid rgba(239,68,68,0.3)', fontWeight: 800 }}>
-                          ⚠️ Đã có bản thể [{duplicateSeason}]
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
-                    <span style={{
-                      padding: '2px 8px',
-                      borderRadius: '10px',
-                      background: 'var(--bg-tertiary)',
-                      color: 'var(--accent-gold)',
-                      fontWeight: 800,
-                      fontSize: '0.72rem'
-                    }}>
-                      💰 {p.salary}
-                    </span>
-                  </div>
-                </div>
+                />
               );
             })}
           </div>

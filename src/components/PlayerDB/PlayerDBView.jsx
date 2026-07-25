@@ -4,6 +4,7 @@ import { usePlayerDB } from '../../hooks/usePlayerDB';
 import playersData from '../../data/players.json';
 import seasonsData from '../../data/seasons.json';
 import { getPlayerAvatarUrl, getSeasonBadgeUrl } from '../../utils/assetResolver';
+import { FifaCardComponent } from '../FifaCardComponent';
 
 export const PlayerDBView = () => {
   const {
@@ -181,73 +182,45 @@ export const PlayerDBView = () => {
         {filteredPlayers.map(player => {
           const isSelected = selectedForCompare.includes(player.id);
           return (
-            <div key={player.id} className="glass-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '12px' }}>
-              <div>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '10px' }}>
-                  <img 
-                    src={getPlayerAvatarUrl(player)} 
-                    alt={player.name}
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                    style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-gold)', flexShrink: 0 }}
-                  />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        {player.ovr && (
-                          <span style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 900,
-                            color: '#000',
-                            background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
-                            padding: '2px 6px',
-                            borderRadius: '6px',
-                            minWidth: '28px',
-                            textAlign: 'center'
-                          }}>
-                            {player.ovr}
-                          </span>
-                        )}
-                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-gold)', background: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '4px' }}>
-                          {player.season}
-                        </span>
-                      </div>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#10b981' }}>
-                        Lương {player.salary}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {player.name} <span style={{ fontSize: '0.85rem', color: 'var(--accent-gold)' }}>[{player.season}]</span>
-                      </h3>
-                      {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
-                        <a
-                          href={player.fifaAddictUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            fontSize: '0.7rem',
-                            color: '#06b6d4',
-                            textDecoration: 'none',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '2px',
-                            fontWeight: 600
-                          }}
-                        >
-                          FIFAAddict <ExternalLink size={12} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
+            <div key={player.id} className="glass-card" style={{ padding: '16px', display: 'flex', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
+              <FifaCardComponent
+                player={player}
+                size="md"
+                isSelected={isSelected}
+                onClick={() => toggleSelectForCompare(player.id)}
+              />
+              
+              <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>
+                    {player.name} <span style={{ fontSize: '0.85rem', color: 'var(--accent-gold)' }}>[{player.season}]</span>
+                  </h3>
+                  {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
+                    <a
+                      href={player.fifaAddictUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#06b6d4',
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        fontWeight: 600
+                      }}
+                    >
+                      FIFAAddict <ExternalLink size={12} />
+                    </a>
+                  )}
                 </div>
 
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                  Vị trí: {player.mainPositions.join(', ')} • Cao {player.heightCm}cm • Chân {player.weakFoot}
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
+                  Vị trí: <strong style={{ color: '#fff' }}>{player.mainPositions.join(', ')}</strong> • Cao {player.heightCm}cm • Chân {player.weakFoot}
                 </p>
 
                 {player.keyMetaTraits && player.keyMetaTraits.length > 0 && (
-                  <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', background: 'var(--bg-tertiary)', padding: '6px 10px', borderRadius: '6px', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', background: 'var(--bg-tertiary)', padding: '6px 10px', borderRadius: '6px' }}>
                     {player.keyMetaTraits.join(' • ')}
                   </div>
                 )}
