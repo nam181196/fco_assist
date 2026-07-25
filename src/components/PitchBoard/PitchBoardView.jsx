@@ -2,6 +2,8 @@ import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { Save, RefreshCw, Layers, Sparkles, Plus, Trash2, Cpu, Gamepad2, Move, RotateCcw } from 'lucide-react';
 import playersData from '../../data/players.json';
 import formationsData from '../../data/formations.json';
+import { calculatePositionFromCoords } from '../../utils/positionMapper';
+import { getPlayerAvatarUrl, getSeasonBadgeUrl } from '../../utils/assetResolver';
 
 export const PitchBoardView = ({
   currentFormation,
@@ -82,10 +84,14 @@ export const PitchBoardView = ({
     e.preventDefault();
     
     const coords = screenToPitchCoords(e.clientX, e.clientY);
+    const dynamicRole = calculatePositionFromCoords(coords.gridX, coords.gridY);
     
     setCustomPositions(prev => ({
       ...prev,
-      [activeDraggingSlotId]: coords
+      [activeDraggingSlotId]: {
+        ...coords,
+        dynamicRole
+      }
     }));
   }, [activeDraggingSlotId, screenToPitchCoords]);
 
@@ -446,9 +452,7 @@ export const PitchBoardView = ({
                     zIndex: isDragging ? 50 : 10,
                     userSelect: 'none',
                     touchAction: 'none',
-                    // Smooth position transition only when NOT dragging
                     transition: isDragging ? 'none' : 'left 0.2s ease, top 0.2s ease',
-                    // 3D mode: lift nodes above pitch with perspective counter-rotation
                     ...(pitchPerspective === '3D' ? {
                       transformStyle: 'preserve-3d',
                       filter: isDragging ? 'drop-shadow(0 8px 20px rgba(59,130,246,0.6))' : 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))'
@@ -471,7 +475,7 @@ export const PitchBoardView = ({
                     }} />
                   )}
 
-                  {/* Node Circle Counter */}
+                  {/* Node Circle Counter / Player Face Avatar */}
                   <div
                     onClick={(e) => {
                       if (!isDragging) {
@@ -480,8 +484,8 @@ export const PitchBoardView = ({
                       }
                     }}
                     style={{
-                      width: '50px',
-                      height: '50px',
+                      width: '54px',
+                      height: '54px',
                       borderRadius: '50%',
                       background: player
                         ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
@@ -504,11 +508,22 @@ export const PitchBoardView = ({
                           : '0 4px 12px rgba(0,0,0,0.4)',
                       position: 'relative',
                       transform: isDragging ? 'scale(1.15)' : 'scale(1)',
-                      transition: 'transform 0.15s ease, box-shadow 0.2s ease'
+                      transition: 'transform 0.15s ease, box-shadow 0.2s ease',
+                      overflow: 'hidden'
                     }}
                   >
                     {player ? (
-                      <span style={{ color: 'var(--accent-gold)', textShadow: '0 0 8px rgba(245,158,11,0.3)' }}>{player.salary}</span>
+                      <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <img 
+                          src={getPlayerAvatarUrl(player)} 
+                          alt={player.name}
+                          onError={(e) => { e.target.style.display = 'none'; }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                        />
+                        <span style={{ position: 'absolute', bottom: '2px', right: '2px', background: 'rgba(0,0,0,0.85)', color: 'var(--accent-gold)', padding: '1px 4px', borderRadius: '4px', fontSize: '0.62rem', fontWeight: 900 }}>
+                          {player.salary}
+                        </span>
+                      </div>
                     ) : (
                       <Plus size={20} strokeWidth={2.5} />
                     )}
@@ -523,8 +538,8 @@ export const PitchBoardView = ({
                         onPointerDown={(e) => e.stopPropagation()}
                         style={{
                           position: 'absolute',
-                          top: '-6px',
-                          right: '-6px',
+                          top: '-4px',
+                          right: '-4px',
                           width: '20px',
                           height: '20px',
                           borderRadius: '50%',
@@ -558,9 +573,15 @@ export const PitchBoardView = ({
                     boxShadow: '0 4px 8px rgba(0,0,0,0.5)',
                     maxWidth: '120px',
                     overflow: 'hidden',
-                    textOverflow: 'ellipsis'
+                    textOverflow: 'ellipsis',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
                   }}>
-                    {pos.role} {player ? `• ${player.name}` : ''}
+                    <span style={{ color: 'var(--accent-gold)', fontWeight: 900 }}>
+                      {customPos?.dynamicRole || pos.role}
+                    </span>
+                    {player ? `• ${player.name}` : ''}
                   </div>
 
                 </div>
@@ -572,6 +593,187 @@ export const PitchBoardView = ({
         </div>
 
       </div>
+
+      {/* Drawer Select Player Panel */}
+      {selectedSlotForAdd && (
+        <div style={{
+          position: 'fixed',
+          top: 0, right: 0, bottom: 0,
+          width: '380px', maxWidth: '90%',
+          background: 'var(--bg-secondary)',
+          borderLeft: '1px solid var(--glass-border)',
+          zIndex: 150,
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '-10px 0 30px rgba(0,0,0,0.5)'
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>CHỌN CẦU THỦ THI ĐẤU</h3>
+            <button onClick={() => setSelectedSlotForAdd(null)} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '1.2rem' }}>✕</button>
+          </div>
+
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+            <input
+              type="text"
+              placeholder="Tìm theo tên cầu thủ..."
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(e.target.value)}
+              style={{ flex: 1, padding: '8px 12px', background: 'var(--bg-tertiary)', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '8px', fontSize: '0.82rem' }}
+            />
+            <select
+              value={seasonFilter}
+              onChange={(e) => setSeasonFilter(e.target.value)}
+              style={{ padding: '8px', background: 'var(--bg-tertiary)', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '8px', fontSize: '0.8rem', maxWidth: '110px' }}
+            >
+              <option value="">Tất cả mùa</option>
+              {uniqueSeasons.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          <div style={{
+            marginBottom: '12px',
+            padding: '8px 12px',
+            borderRadius: '8px',
+            background: 'rgba(59,130,246,0.1)',
+            border: '1px solid rgba(59,130,246,0.3)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#3b82f6' }}>
+              📍 {selectedSlotForAdd.role} ({selectedSlotForAdd.label})
+            </span>
+            <button
+              onClick={() => setSelectedSlotForAdd(null)}
+              style={{
+                padding: '2px 8px',
+                borderRadius: '6px',
+                border: 'none',
+                background: 'rgba(239,68,68,0.2)',
+                color: '#ef4444',
+                cursor: 'pointer',
+                fontSize: '0.7rem',
+                fontWeight: 700
+              }}
+            >
+              Huỷ
+            </button>
+          </div>
+
+          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px' }}>
+            {filteredPlayers.map(p => {
+              // Unique Player Rule Check across active squad slots
+              const normName = p.name.toLowerCase().trim();
+              let isDuplicateOnOtherSlot = false;
+              let duplicateSeason = '';
+
+              for (const [r, assignedP] of Object.entries(slotMap)) {
+                if (r === selectedSlotForAdd.role) continue;
+                if (assignedP && assignedP.name && assignedP.name.toLowerCase().trim() === normName) {
+                  isDuplicateOnOtherSlot = true;
+                  duplicateSeason = assignedP.season;
+                  break;
+                }
+              }
+
+              return (
+                <div
+                  key={p.id}
+                  onClick={() => {
+                    if (isDuplicateOnOtherSlot) {
+                      alert(`Cầu thủ '${p.name}' đã có mặt trong đội hình (Thẻ ${duplicateSeason})! Một đội hình không thể dùng 2 thẻ cùng tên.`);
+                      return;
+                    }
+                    if (selectedSlotForAdd) {
+                      assignPlayerToSlot(selectedSlotForAdd.role, p);
+                      setSelectedSlotForAdd(null);
+                    }
+                  }}
+                  className="glass-card"
+                  style={{
+                    padding: '10px 12px',
+                    cursor: isDuplicateOnOtherSlot ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    transition: 'all 0.2s ease',
+                    opacity: isDuplicateOnOtherSlot ? 0.45 : 1,
+                    borderColor: isDuplicateOnOtherSlot ? 'rgba(239,68,68,0.4)' : 'var(--glass-border)',
+                    background: isDuplicateOnOtherSlot ? 'rgba(239,68,68,0.05)' : 'var(--bg-tertiary)',
+                    gap: '8px'
+                  }}
+                >
+                  {/* Player Avatar */}
+                  <img 
+                    src={getPlayerAvatarUrl(p)} 
+                    alt={p.name}
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                    style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--glass-border)', flexShrink: 0 }}
+                  />
+
+                  {/* OVR Badge */}
+                  <div style={{
+                    minWidth: '32px',
+                    height: '32px',
+                    borderRadius: '6px',
+                    background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#000',
+                    fontWeight: 900,
+                    fontSize: '0.78rem',
+                    flexShrink: 0
+                  }}>
+                    {p.ovr || '?'}
+                  </div>
+                  
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 800, fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {p.name} <span style={{ color: 'var(--accent-gold)', fontSize: '0.75rem' }}>[{p.season}]</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
+                      <span style={{
+                        padding: '1px 6px',
+                        borderRadius: '6px',
+                        background: 'rgba(245,158,11,0.15)',
+                        color: 'var(--accent-gold)',
+                        fontWeight: 800,
+                        fontSize: '0.65rem',
+                        border: '1px solid rgba(245,158,11,0.3)'
+                      }}>
+                        {p.season}
+                      </span>
+                      <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                        {p.mainPositions.join('/')}
+                      </span>
+                      {isDuplicateOnOtherSlot && (
+                        <span style={{ fontSize: '0.62rem', color: '#ef4444', background: 'rgba(239,68,68,0.15)', padding: '1px 4px', borderRadius: '4px', border: '1px solid rgba(239,68,68,0.3)', fontWeight: 800 }}>
+                          ⚠️ Đã có bản thể [{duplicateSeason}]
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
+                    <span style={{
+                      padding: '2px 8px',
+                      borderRadius: '10px',
+                      background: 'var(--bg-tertiary)',
+                      color: 'var(--accent-gold)',
+                      fontWeight: 800,
+                      fontSize: '0.72rem'
+                    }}>
+                      💰 {p.salary}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ====== RIGHT COLUMN: Player Selection Drawer ====== */}
       <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>

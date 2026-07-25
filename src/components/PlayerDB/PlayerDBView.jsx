@@ -3,6 +3,7 @@ import { Search, Filter, ArrowLeftRight, Check, X, ExternalLink } from 'lucide-r
 import { usePlayerDB } from '../../hooks/usePlayerDB';
 import playersData from '../../data/players.json';
 import seasonsData from '../../data/seasons.json';
+import { getPlayerAvatarUrl, getSeasonBadgeUrl } from '../../utils/assetResolver';
 
 export const PlayerDBView = () => {
   const {
@@ -182,53 +183,63 @@ export const PlayerDBView = () => {
           return (
             <div key={player.id} className="glass-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '12px' }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    {player.ovr && (
-                      <span style={{
-                        fontSize: '0.8rem',
-                        fontWeight: 900,
-                        color: '#000',
-                        background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
-                        padding: '2px 6px',
-                        borderRadius: '6px',
-                        minWidth: '28px',
-                        textAlign: 'center'
-                      }}>
-                        {player.ovr}
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '10px' }}>
+                  <img 
+                    src={getPlayerAvatarUrl(player)} 
+                    alt={player.name}
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                    style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-gold)', flexShrink: 0 }}
+                  />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {player.ovr && (
+                          <span style={{
+                            fontSize: '0.8rem',
+                            fontWeight: 900,
+                            color: '#000',
+                            background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
+                            padding: '2px 6px',
+                            borderRadius: '6px',
+                            minWidth: '28px',
+                            textAlign: 'center'
+                          }}>
+                            {player.ovr}
+                          </span>
+                        )}
+                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-gold)', background: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '4px' }}>
+                          {player.season}
+                        </span>
+                      </div>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#10b981' }}>
+                        Lương {player.salary}
                       </span>
-                    )}
-                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-gold)', background: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '4px' }}>
-                      {player.season}
-                    </span>
-                  </div>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#10b981' }}>
-                    Lương {player.salary}
-                  </span>
-                </div>
+                    </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px' }}>
-                    {player.name} <span style={{ fontSize: '0.85rem', color: 'var(--accent-gold)' }}>[{player.season}]</span>
-                  </h3>
-                  {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
-                    <a
-                      href={player.fifaAddictUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '0.7rem',
-                        color: '#06b6d4',
-                        textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '2px',
-                        fontWeight: 600
-                      }}
-                    >
-                      FIFAAddict <ExternalLink size={12} />
-                    </a>
-                  )}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {player.name} <span style={{ fontSize: '0.85rem', color: 'var(--accent-gold)' }}>[{player.season}]</span>
+                      </h3>
+                      {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
+                        <a
+                          href={player.fifaAddictUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontSize: '0.7rem',
+                            color: '#06b6d4',
+                            textDecoration: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '2px',
+                            fontWeight: 600
+                          }}
+                        >
+                          FIFAAddict <ExternalLink size={12} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px' }}>

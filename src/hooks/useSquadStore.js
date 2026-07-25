@@ -34,11 +34,40 @@ export const useSquadStore = () => {
 
   const isSalaryExceeded = totalSalary > systemConfig.CURRENT_SALARY_CAP;
 
+  const validateUniquePlayerConstraint = (candidatePlayer, targetRole, customPositions = null) => {
+    if (!candidatePlayer || !candidatePlayer.name) return { allowed: true };
+    const normCandidateName = candidatePlayer.name.toLowerCase().trim();
+    const activeMap = customPositions || slotMap;
+
+    for (const [role, data] of Object.entries(activeMap)) {
+      if (role === targetRole) continue;
+      const playerObj = data.player || data;
+      if (playerObj && playerObj.name) {
+        const normExistingName = playerObj.name.toLowerCase().trim();
+        if (normExistingName === normCandidateName) {
+          return {
+            allowed: false,
+            conflictName: playerObj.name,
+            conflictSeason: playerObj.season,
+            conflictRole: role
+          };
+        }
+      }
+    }
+    return { allowed: true };
+  };
+
   const assignPlayerToSlot = (role, player) => {
+    const check = validateUniquePlayerConstraint(player, role);
+    if (!check.allowed) {
+      alert(`Cầu thủ '${check.conflictName}' đã có mặt trong đội hình (Thẻ ${check.conflictSeason})! Vui lòng chọn cầu thủ khác.`);
+      return false;
+    }
     setSlotMap(prev => ({
       ...prev,
       [role]: player
     }));
+    return true;
   };
 
   const removePlayerFromSlot = (role) => {
@@ -101,6 +130,7 @@ export const useSquadStore = () => {
     totalSalary,
     isSalaryExceeded,
     assignPlayerToSlot,
+    validateUniquePlayerConstraint,
     removePlayerFromSlot,
     handleSaveSquad,
     handleLoadSquad,
