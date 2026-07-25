@@ -1,6 +1,8 @@
-import React from 'react';
-import { Search, Filter, ArrowLeftRight, Check, X } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Search, Filter, ArrowLeftRight, Check, X, ExternalLink } from 'lucide-react';
 import { usePlayerDB } from '../../hooks/usePlayerDB';
+import playersData from '../../data/players.json';
+import seasonsData from '../../data/seasons.json';
 
 export const PlayerDBView = () => {
   const {
@@ -14,6 +16,30 @@ export const PlayerDBView = () => {
     comparisonData
   } = usePlayerDB();
 
+  // Create a map of season id -> season info from seasons.json
+  const seasonMap = useMemo(() => {
+    const map = {};
+    seasonsData.forEach(s => {
+      map[s.id] = s;
+    });
+    return map;
+  }, []);
+
+  // Dynamically get unique seasons present in players.json with count
+  const availableSeasons = useMemo(() => {
+    const counts = {};
+    playersData.forEach(p => {
+      counts[p.season] = (counts[p.season] || 0) + 1;
+    });
+    
+    // Sort seasons by number of players descending
+    return Object.keys(counts).map(seasonId => ({
+      id: seasonId,
+      name: seasonMap[seasonId]?.name || seasonId,
+      count: counts[seasonId]
+    })).sort((a, b) => b.count - a.count);
+  }, [seasonMap]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       
@@ -22,7 +48,9 @@ export const PlayerDBView = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>TRA CỨU & SO SÁNH ĐỐI ĐẦU CẦU THỦ</h2>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Bộ lọc đa tiêu chí chuẩn FCO & Modal so sánh Side-by-Side</p>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              Dữ liệu đồng bộ vn.fifaaddict.com • Bộ lọc đa tiêu chí chuẩn FCO & Modal so sánh Side-by-Side
+            </p>
           </div>
 
           <button
@@ -46,7 +74,7 @@ export const PlayerDBView = () => {
         </div>
 
         {/* Filter inputs */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1.2fr 1fr', gap: '12px' }}>
           <div style={{ position: 'relative' }}>
             <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input
@@ -73,11 +101,17 @@ export const PlayerDBView = () => {
           >
             <option value="ALL">Tất cả vị trí</option>
             <option value="ST">ST - Tiền đạo cắm</option>
+            <option value="CF">CF - Hộ công</option>
+            <option value="LW">LW - Tiền đạo cánh trái</option>
+            <option value="RW">RW - Tiền đạo cánh phải</option>
             <option value="CAM">CAM - Tiền vệ tấn công</option>
-            <option value="LW">LW - Cánh trái</option>
-            <option value="RW">RW - Cánh phải</option>
+            <option value="CM">CM - Tiền vệ trung tâm</option>
+            <option value="LM">LM - Tiền vệ cánh trái</option>
+            <option value="RM">RM - Tiền vệ cánh phải</option>
             <option value="CDM">CDM - Tiền vệ phòng ngự</option>
             <option value="CB">CB - Trung vệ</option>
+            <option value="LB">LB - Hậu vệ trái</option>
+            <option value="RB">RB - Hậu vệ phải</option>
             <option value="GK">GK - Thủ môn</option>
           </select>
 
@@ -86,10 +120,12 @@ export const PlayerDBView = () => {
             onChange={(e) => setFilters(prev => ({ ...prev, season: e.target.value }))}
             style={{ padding: '8px 12px', background: 'var(--bg-tertiary)', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '8px', fontSize: '0.85rem' }}
           >
-            <option value="ALL">Tất cả mùa giải</option>
-            <option value="ICON">Mùa ICON</option>
-            <option value="24UCL">Mùa 24UCL</option>
-            <option value="CU">Mùa CU</option>
+            <option value="ALL">Tất cả mùa giải ({playersData.length} cầu thủ)</option>
+            {availableSeasons.map(s => (
+              <option key={s.id} value={s.id}>
+                Mùa {s.id} - {s.name} ({s.count})
+              </option>
+            ))}
           </select>
 
           <input
@@ -110,22 +146,61 @@ export const PlayerDBView = () => {
             <div key={player.id} className="glass-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '12px' }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-gold)', background: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '4px' }}>
-                    {player.season}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {player.ovr && (
+                      <span style={{
+                        fontSize: '0.8rem',
+                        fontWeight: 900,
+                        color: '#000',
+                        background: 'linear-gradient(135deg, var(--accent-gold), #d97706)',
+                        padding: '2px 6px',
+                        borderRadius: '6px',
+                        minWidth: '28px',
+                        textAlign: 'center'
+                      }}>
+                        {player.ovr}
+                      </span>
+                    )}
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-gold)', background: 'var(--bg-tertiary)', padding: '2px 8px', borderRadius: '4px' }}>
+                      {player.season}
+                    </span>
+                  </div>
                   <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#10b981' }}>
                     Lương {player.salary} BP
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px' }}>{player.name}</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px' }}>{player.name}</h3>
+                  {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
+                    <a
+                      href={player.fifaAddictUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#06b6d4',
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '2px',
+                        fontWeight: 600
+                      }}
+                    >
+                      FIFAAddict <ExternalLink size={12} />
+                    </a>
+                  )}
+                </div>
+
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
                   Vị trí: {player.mainPositions.join(', ')} • Cao {player.heightCm}cm • Chân {player.weakFoot}
                 </p>
 
-                <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', background: 'var(--bg-tertiary)', padding: '6px 10px', borderRadius: '6px', marginBottom: '8px' }}>
-                  {player.keyMetaTraits.join(' • ')}
-                </div>
+                {player.keyMetaTraits && player.keyMetaTraits.length > 0 && (
+                  <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', background: 'var(--bg-tertiary)', padding: '6px 10px', borderRadius: '6px', marginBottom: '8px' }}>
+                    {player.keyMetaTraits.join(' • ')}
+                  </div>
+                )}
 
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-gold)' }}>
                   Giá: {player.estimatedBpRange}
