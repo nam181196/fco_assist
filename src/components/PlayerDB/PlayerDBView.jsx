@@ -47,30 +47,67 @@ export const PlayerDBView = () => {
       <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>TRA CỨU & SO SÁNH ĐỐI ĐẦU CẦU THỦ</h2>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              Dữ liệu đồng bộ vn.fifaaddict.com • Bộ lọc đa tiêu chí chuẩn FCO & Modal so sánh Side-by-Side
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0 }}>TRA CỨU & SO SÁNH ĐỐI ĐẦU CẦU THỦ</h2>
+              <span style={{
+                padding: '2px 8px',
+                borderRadius: '12px',
+                background: 'rgba(16,185,129,0.15)',
+                color: '#10b981',
+                fontSize: '0.72rem',
+                fontWeight: 800,
+                border: '1px solid rgba(16,185,129,0.3)'
+              }}>
+                ⚡ {playersData.length} Cầu thủ • {availableSeasons.length} Mùa giải
+              </span>
+            </div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+              Đồng bộ dữ liệu vn.fifaaddict.com • Bộ lọc đa tiêu chí FCO & Modal so sánh Side-by-Side
             </p>
           </div>
 
-          <button
-            onClick={() => setIsCompareModalOpen(true)}
-            disabled={selectedForCompare.length < 2}
-            style={{
-              padding: '10px 18px',
-              borderRadius: '8px',
-              border: 'none',
-              background: selectedForCompare.length >= 2 ? 'var(--accent-gold)' : 'var(--bg-tertiary)',
-              color: selectedForCompare.length >= 2 ? '#000' : 'var(--text-muted)',
-              fontWeight: 800,
-              cursor: selectedForCompare.length >= 2 ? 'pointer' : 'not-allowed',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}
-          >
-            <ArrowLeftRight size={16} /> So Sánh đối đầu ({selectedForCompare.length}/3)
-          </button>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <a
+              href={filters.searchName ? `https://vn.fifaaddict.com/fo4db?q=${encodeURIComponent(filters.searchName)}` : "https://vn.fifaaddict.com/fo4db"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              style={{
+                padding: '10px 16px',
+                borderRadius: '8px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                textDecoration: 'none',
+                background: 'var(--bg-tertiary)',
+                color: '#06b6d4',
+                border: '1px solid rgba(6,182,212,0.3)'
+              }}
+            >
+              <ExternalLink size={15} /> Tìm Trên FIFAAddict ↗
+            </a>
+
+            <button
+              onClick={() => setIsCompareModalOpen(true)}
+              disabled={selectedForCompare.length < 2}
+              style={{
+                padding: '10px 18px',
+                borderRadius: '8px',
+                border: 'none',
+                background: selectedForCompare.length >= 2 ? 'var(--accent-gold)' : 'var(--bg-tertiary)',
+                color: selectedForCompare.length >= 2 ? '#000' : 'var(--text-muted)',
+                fontWeight: 800,
+                cursor: selectedForCompare.length >= 2 ? 'pointer' : 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <ArrowLeftRight size={16} /> So Sánh đối đầu ({selectedForCompare.length}/3)
+            </button>
+          </div>
         </div>
 
         {/* Filter inputs */}
