@@ -167,7 +167,7 @@ export const PlayerDBView = () => {
 
           <input
             type="number"
-            placeholder="Lương tối đa (BP)"
+            placeholder="Lương tối đa"
             value={filters.maxSalary || ''}
             onChange={(e) => setFilters(prev => ({ ...prev, maxSalary: Number(e.target.value) }))}
             style={{ padding: '8px 12px', background: 'var(--bg-tertiary)', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '8px', fontSize: '0.85rem' }}
@@ -203,7 +203,7 @@ export const PlayerDBView = () => {
                     </span>
                   </div>
                   <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#10b981' }}>
-                    Lương {player.salary} BP
+                    Lương {player.salary}
                   </span>
                 </div>
 

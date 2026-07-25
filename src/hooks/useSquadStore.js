@@ -51,7 +51,7 @@ export const useSquadStore = () => {
 
   const handleSaveSquad = () => {
     if (isSalaryExceeded) {
-      alert(`Đội hình Quá Lương! Tổng Lương hiện tại là ${totalSalary} BP, vượt quá trần Lương trần ${systemConfig.CURRENT_SALARY_CAP} BP!`);
+      alert(`Đội hình Quá Lương! Tổng Lương hiện tại là ${totalSalary}, vượt quá hạn mức Lương trần ${systemConfig.CURRENT_SALARY_CAP}!`);
       return false;
     }
 

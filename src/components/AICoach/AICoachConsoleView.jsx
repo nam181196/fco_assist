@@ -135,7 +135,7 @@ export const AICoachConsoleView = ({ slotMap, systemConfig, assignPlayerToSlot, 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>TƯ VẤN SƠ ĐỒ - CHIẾN THUẬT - KỸ NĂNG HLV</h2>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>AI phân tích ma trận cầu thủ đầu vào để đề xuất trọn gói chuẩn Meta Lương {systemConfig.CURRENT_SALARY_CAP} BP</p>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>AI phân tích ma trận cầu thủ đầu vào để đề xuất trọn gói chuẩn Meta Lương {systemConfig.CURRENT_SALARY_CAP}</p>
               </div>
               <button
                 onClick={handleRunUnifiedCoach}

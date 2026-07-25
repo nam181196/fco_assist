@@ -59,7 +59,7 @@ export const comparePlayersSideBySide = (playerIds = []) => {
   const comparisonAttributes = [
     { key: 'name', label: 'Tên Cầu Thủ' },
     { key: 'season', label: 'Mùa Giải' },
-    { key: 'salary', label: 'Mức Lương (BP)' },
+    { key: 'salary', label: 'Mức Lương' },
     { key: 'mainPositions', label: 'Vị Trí Thi Đấu', format: (v) => Array.isArray(v) ? v.join(', ') : v },
     { key: 'heightCm', label: 'Chiều Cao / Cân Nặng', format: (v, p) => `${p.heightCm} cm / ${p.weightKg} kg` },
     { key: 'weakFoot', label: 'Kỹ Năng Chân' },

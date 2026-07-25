@@ -101,7 +101,7 @@ export function App() {
         fontSize: '0.8rem',
         color: 'var(--text-muted)'
       }}>
-        FCO Meta Tactics & AI Solution Engine v2.0.0 (APPROVED) • Lương trần hiện tại: {systemConfig.CURRENT_SALARY_CAP} BP
+        FCO Meta Tactics & AI Solution Engine v2.0.0 (APPROVED) • Lương trần hiện tại: {systemConfig.CURRENT_SALARY_CAP}
       </footer>
 
     </div>
