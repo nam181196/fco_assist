@@ -169,7 +169,7 @@ export const FifaCardComponent = ({
           src={avatarUrl}
           alt={player.name}
           onError={(e) => {
-            e.target.src = 'https://vn.fifaaddict.com/fo4db/assets/players/p0.png';
+            e.target.src = 'https://s1.fifaaddict.com/assets/img/fo4_player_pack_empty.png';
           }}
           style={{
             width: dimensions.avatarSize,
