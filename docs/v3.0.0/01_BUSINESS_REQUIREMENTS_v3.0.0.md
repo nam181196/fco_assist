@@ -1,43 +1,114 @@
-# [BRD] Tài Liệu Yêu Cầu Nghiệp Vụ - Version 3.0.0
-*(Business Requirements Document - FCO Assist v3.0.0)*
+# TÀI LIỆU YÊU CẦU NGHIỆP VỤ (BRD) v3.0.0 - FCO META TACTICS & AI SOLUTION ENGINE
 
-## 1. MỤC TIÊU PHIÊN BẢN v3.0.0
-Phiên bản **v3.0.0** tập trung giải quyết 3 bài toán lớn về quy tắc thi đấu, tính chân thực của giao diện và trải nghiệm tương tác sơ đồ đội hình:
-1. **Ràng buộc Duy nhất 1 Tên Cầu Thủ trong Sơ Đồ Đội Hình (Unique Player Squad Constraint):** Đảm bảo tính thực tế của game FO4/FCO - trong đội hình 11 cầu thủ không thể tồn tại 2 phiên bản mùa giải khác nhau của cùng 1 tên cầu thủ (Ví dụ: Đã dùng CR7 26TY thì không được dùng thêm CR7 CC hay CR7 IPRM).
-2. **Cập nhật Vị trí Động khi Kéo thả (Smart Dynamic Position Adaptation):** Khi kéo thả cầu thủ sang khu vực khác trên sân, vị trí hiển thị trên thẻ phải tự động chuyển đổi tương ứng theo tọa độ khu vực (Ví dụ: Kéo cầu thủ gốc ST xuống khu vực thủ môn thì vị trí tự động chuyển thành GK).
-3. **Giao diện Thẻ Cầu thủ Chuẩn Game FO4/FCO (Authentic FIFAAddict Card Visuals):** Tích hợp hình ảnh chân dung cầu thủ (Player Avatar) và Logo Mùa giải (Season Badge) từ `vn.fifaaddict.com`, mang lại giao diện thiết kế sống động, chân thực 100% như trong game.
-
----
-
-## 2. PHẠM VI & YÊU CẦU NGHIỆP VỤ CHI TIẾT (REQUIREMENTS SCOPE)
-
-### BRD-3.1: Quy Tắc Duy Nhất 1 Tên Cầu Thủ (Unique Player Rule)
-- **Mô tả:** Đội hình thi đấu chính thức (11 vị trí) chỉ được phép sử dụng duy nhất 1 thẻ bài đại diện cho 1 tên cầu thủ.
-- **Quy tắc kiểm tra:**
-  - Khi gán cầu thủ vào 1 vị trí trên sân: Hệ thống kiểm tra tên chuẩn hóa (`normalized_name`) của cầu thủ mới với 10 cầu thủ còn lại trên sân.
-  - Nếu tên đã tồn tại: Hệ thống chặn hành động gán, hiển thị thông báo toast: *"Cầu thủ '[Tên]' đã có mặt trong đội hình (Thẻ [Mùa])"*.
-  - Trong danh sách chọn cầu thủ (Drawer/Modal): Tự động đánh dấu hoặc làm mờ các cầu thủ bị trùng tên với cầu thủ đang có trên sân.
-
-### BRD-3.2: Tự Động Chuyển Vị Trí Theo Tọa Độ Kéo Thả (Smart Position Mapping)
-- **Mô tả:** Khi kéo thả cầu thủ tự do trên sân 2D/3D, vị trí thi đấu (`role` / `position`) của cầu thủ tại slot đó phải tự động thích ứng theo vùng tọa độ mới.
-- **Ma trận phân vùng tọa độ mặt sân:**
-  - **Vùng Y (0% - 20%):** Vùng Tiền đạo ➔ `ST` (Middle), `LW` (Left), `RW` (Right), `CF` (Center-Low).
-  - **Vùng Y (20% - 40%):** Vùng Tiền vệ tấn công ➔ `CAM` (Middle), `LM` (Left), `RM` (Right).
-  - **Vùng Y (40% - 60%):** Vùng Tiền vệ trung tâm ➔ `CM` / `LCM` / `RCM`.
-  - **Vùng Y (60% - 75%):** Vùng Tiền vệ phòng ngự ➔ `CDM` / `LDM` / `RDM`.
-  - **Vùng Y (75% - 90%):** Vùng Hậu vệ ➔ `CB` / `LCB` / `RCB`, `LB` (Left), `RB` (Right), `LWB` / `RWB`.
-  - **Vùng Y (90% - 100%):** Vùng Vòng cấm Thủ môn ➔ `GK`.
-
-### BRD-3.3: Tích Hợp Hình Ảnh Thẻ Chuẩn Game FO4/FCO từ FIFAAddict
-- **Mô tả:** Hiển thị thẻ cầu thủ với hình chân dung thật (Player Avatar) và Logo Mùa giải (Season Logo) thu thập từ `vn.fifaaddict.com`.
-- **Thành phần giao diện thẻ mới:**
-  - **Ảnh chân dung cầu thủ (Avatar):** `https://fo4.garena.in.th/database/fo4db/assets/players/p{uid}.png` hoặc fallback CDN FIFAAddict.
-  - **Logo Mùa giải (Season Badge):** `https://fo4.garena.in.th/database/fo4db/assets/season/{season}.png`.
-  - **Khung thẻ Card Frame:** Thiết kế bo góc glassmorphism hiệu ứng phát sáng gradient theo OVR (Tím 120+, Vàng 110+, Xanh 100+).
+| Thông tin        | Chi tiết                 |
+| :--------------- | :----------------------- |
+| **Dự án**        | FCO Meta Tactics & AI Solution Engine |
+| **Phiên bản**    | **3.0.0 (PROPOSED DRAFT)** |
+| **Ngày cập nhật**| 25/07/2026               |
+| **Trạng thái**   | DRAFT / PENDING USER APPROVAL |
+| **Tác giả**      | Senior Business Analyst (BA) & Project Manager (PM) |
 
 ---
 
-## 3. TIÊU CHÍ NGHIỆM THU VERSION 3.0.0 (ACCEPTANCE CRITERIA)
-1. **[AC-3.1]** Thêm CR7 25TY vào ST -> Drawer chọn cầu thủ tự động disable các thẻ CR7 CC, CR7 IPRM, CR7 ICONTM.
-2. **[AC-3.2]** Kéo thẻ từ vị trí ST xuống khu vực khung thành GK -> Nhãn vị trí lập tức đổi từ ST thành GK.
-3. **[AC-3.3]** Thẻ cầu thủ ở Sân bóng và DB hiển thị hình chân dung chuẩn và logo mùa giải chính xác.
+## LỊCH SỬ THAY ĐỔI
+
+| Version | Ngày | Người sửa | Mô tả thay đổi |
+| :--- | :--- | :--- | :--- |
+| 1.0.0 | 24/07/2026 | Senior BA & PM | Phiên bản MVP v1.0.0 (APPROVED): Tích hợp Vision, Personas, Use Cases, Lương trần FCO 300+, Dynamic Salary Cap, Real-time AI Auto-Grounding, Dual Theme (Dark/Light Mode), Frontend UI/UX Business Rules. |
+| 2.0.0 | 24/07/2026 | Senior BA & PM | Nâng cấp v2.0.0 (APPROVED): Đồng bộ 2,306 thẻ chuẩn FIFAAddict, Kéo thả vị trí Sơ đồ Độc lạ, Sân bóng 2D/3D, Chế độ Đấu 1v1 vs Giả Lập GLXH & AI Engine Giải thích Lý do Chiến thuật. Chuẩn hóa Lương số. |
+| 3.0.0 | 25/07/2026 | Senior BA & PM | **Đề xuất v3.0.0 (DRAFT FOR REVIEW)**: Ràng buộc Duy nhất 1 Tên Cầu thủ trên Sơ đồ Đội hình (Unique Player Squad Rule), Tự động Cập nhật Vị trí theo Tọa độ Kéo thả (Smart Pitch Coordinate Mapper), Tích hợp Ảnh chân dung & Logo Mùa giải Chuẩn Game từ `vn.fifaaddict.com`. |
+
+---
+
+## 1. TỔNG QUAN DỰ ÁN (v3.0.0)
+
+Dự án ứng dụng Web hỗ trợ game thủ **FC Online (FCO)** xây dựng đội hình, quản lý squad và tối ưu chiến thuật thông minh nhằm nâng cao hiệu suất thi đấu. Trở thành Nền tảng Trợ lý AI và Tra cứu Chiến thuật Số 1 cho game thủ FCO tại Việt Nam và quốc tế.
+
+- **Mục đích (v3.0.0):** 
+  1. **Nâng cao tính thực tế của quy tắc xếp đội hình:** Đảm bảo 1 đội hình thi đấu chính thức (11 vị trí) chỉ sử dụng **1 phiên bản duy nhất của 1 tên cầu thủ** (Ví dụ: Đã chọn `Cristiano Ronaldo [26TY]` ở ST thì không được chọn thêm `Cristiano Ronaldo [CC]` hay `Cristiano Ronaldo [IPRM]` ở các vị trí khác trên sân).
+  2. **Cập nhật Vị trí Động khi Kéo Thả:** Khi người dùng kéo thả thẻ cầu thủ sang khu vực khác trên sân 2D/3D (Ví dụ: Kéo cầu thủ gốc ST xuống khu vực khung thành thủ môn), mã vị trí hiển thị trên thẻ và slot sẽ **tự động chuyển đổi mượt mà tương ứng theo tọa độ mặt sân (`GK`)**, không bị giữ nguyên mã cũ.
+  3. **Visual Thẻ Cầu Thủ Chuẩn Game 100%:** Hiển thị thẻ cầu thủ với hình chân dung thật (Player Avatar) và Logo Mùa giải (Season Badge Logo) thu thập chuẩn từ `vn.fifaaddict.com`.
+
+- **Giá trị nghiệp vụ:** 
+  - **Tuân thủ Luật Đội hình Game:** Loại bỏ triệt để sơ hở xếp trùng lặp tên cầu thủ, giúp sơ đồ xuất ra hoàn toàn hợp lệ để sử dụng trực tiếp trong game FO4/FCO.
+  - **Trải nghiệm Kéo thả Thông minh (Smart Drag-and-Drop):** Người dùng có thể tự do tạo các bài sơ đồ biến tấu mà không lo vị trí bị hiển thị sai lệch so với vị trí đứng thực tế trên sân.
+  - **Giao diện Đẳng cấp Chuẩn Game (In-Game Aesthetic):** Mang lại trải nghiệm thị giác sống động với hình ảnh chân dung và logo mùa giải chính hãng.
+
+- **Đối tượng người dùng (Personas v3.0.0):** 
+  - *Persona 1 - Minh (Rank Pusher - 24 tuổi):* Cần xếp đội hình chuẩn 100% luật game không bị trùng tên cầu thủ giữa các mùa giải khác nhau.
+  - *Persona 2 - Nam (Tactics Innovator - 22 tuổi):* Thích kéo thả cầu thủ biến tấu trên sân và muốn nhãn vị trí (`ST`, `CAM`, `CM`, `CDM`, `CB`, `GK`) tự động chuyển chính xác theo khu vực thả.
+  - *Persona 3 - Hoàng (Visual Enthusiast - 28 tuổi):* Đề cao thẩm mỹ giao diện, muốn thẻ cầu thủ phải có đầy đủ hình chân dung và logo mùa giải chuẩn như trong game.
+
+---
+
+## 2. VẤN ĐỀ & CƠ HỘI (PROBLEMS & OPPORTUNITIES)
+
+### Các vấn đề (Problems)
+1. **Sơ đồ hiện tại cho phép chọn nhiều mùa của cùng 1 tên cầu thủ**: Người dùng có thể vô tình xếp cả CR7 26TY và CR7 CC trong cùng 1 đội hình 11 người. Điều này vi phạm luật đội hình của FO4/FCO.
+2. **Kéo thả vị trí cầu thủ nhưng nhãn vị trí không đổi theo khu vực**: Khi kéo một cầu thủ ST xuống khu vực phòng ngự hoặc thủ môn, nhãn hiển thị vẫn giữ nguyên `ST`, gây hiểu nhầm về vai trò thi đấu thực tế trên sân.
+3. **Thẻ cầu thủ thiếu hình chân dung và logo mùa giải**: Giao diện thẻ hiện tại mới chỉ hiển thị chữ và khung màu đơn giản, chưa tái hiện được thần thái chân dung cầu thủ và bộ nhận diện mùa giải đặc trưng của FIFAAddict.
+
+### Các cơ hội (Opportunities)
+- **Engine Kiểm soát Ràng buộc Tên Cầu Thủ (Unique Player Rule Engine)**: Tự động vô hiệu hóa/làm mờ các thẻ trùng tên trong Drawer chọn cầu thủ và phát Toast cảnh báo trực quan.
+- **Thuật toán Mapper Tọa độ Mặt Sân (Smart Position Coordinate Mapper)**: Tự động tính toán tọa độ `(gridX, gridY)` khi thả thẻ để quy đổi ra mã vị trí chính xác (`GK`, `CB`, `LB`, `RB`, `CDM`, `CM`, `CAM`, `LM`, `RM`, `ST`, `LW`, `RW`).
+- **FIFAAddict Asset Renderer**: Tích hợp CDN hình chân dung cầu thủ và logo mùa giải chính hãng.
+
+---
+
+## 3. MỤC TIÊU DỰ ÁN & KPIS ĐO LƯỜNG (v3.0.0)
+
+- **Độ chính xác Ràng buộc Đội hình (100% Squad Rule Compliance):** 0% trường hợp trùng tên cầu thủ tồn tại trên cùng một sơ đồ đội hình thi đấu.
+- **Phản hồi Thích ứng Vị trí (Position Adaptation Speed):** Vị trí trên thẻ cập nhật tức thì trong `< 16ms` ngay khi kết thúc thao tác thả thẻ (Drag End).
+- **Tỷ lệ Tải Asset Hình ảnh (Image Asset Render Rate):** > 98% thẻ cầu thủ hiển thị đầy đủ hình chân dung và logo mùa giải với cơ chế Fallback mượt mượt khi mất mạng.
+
+---
+
+## 4. PHẠM VI DỰ ÁN & YÊU CẦU NGHIỆP VỤ CHI TIẾT
+
+### FR-3.1: Quy Tắc Ràng Buộc 1 Cầu Thủ Duy Nhất Trên Sơ Đồ (Unique Player Squad Rule)
+- **Nghiệp vụ:** Một sơ đồ 11 cầu thủ chỉ được chứa duy nhất 1 bản thể đại diện cho tên của cầu thủ đó.
+- **Chi tiết kiểm soát:**
+  1. Khi người dùng bấm vào 1 vị trí trên sân để mở Drawer chọn cầu thủ: Tất cả các thẻ cầu thủ trong danh sách có `name` trùng với 10 cầu thủ đang có trên sân sẽ tự động chuyển sang trạng thái `Disabled` (Mờ 50% + Nhãn *"Đã có bản thể [Mùa] trên sân"*).
+  2. Khi kéo thả cầu thủ từ bên ngoài vào sân: Nếu trùng tên cầu thủ đã có, hệ thống hủy thao tác gán và phát Toast cảnh báo màu cam: *"Cầu thủ '[Tên]' đã có mặt trong đội hình (Thẻ [Mùa])"*.
+
+### FR-3.2: Tự Động Thích Ứng Vị Trí Theo Tọa Độ Kéo Thả (Smart Pitch Position Adaptation)
+- **Nghiệp vụ:** Khi thẻ cầu thủ được thả tại vị trí bất kỳ trên sân 2D/3D, nhãn vị trí và role của slot tự động chuyển đổi tương ứng theo phân vùng tọa độ.
+- **Phân vùng tọa độ mặt sân `(gridX %, gridY %)`:**
+  - **Y >= 88%:** Vùng Thủ môn ➔ `GK`.
+  - **Y 68% - 87%:** Vùng Hậu vệ ➔ `LB` (X <= 25%), `LCB` (25% < X <= 40%), `CB` (40% < X <= 60%), `RCB` (60% < X <= 75%), `RB` (X > 75%).
+  - **Y 52% - 67%:** Vùng Tiền vệ phòng ngự ➔ `LDM` (X <= 35%), `CDM` (35% < X <= 65%), `RDM` (X > 65%).
+  - **Y 35% - 51%:** Vùng Tiền vệ trung tâm ➔ `LCM` (X <= 35%), `CM` (35% < X <= 65%), `RCM` (X > 65%).
+  - **Y 20% - 34%:** Vùng Tiền vệ tấn công / Cánh ➔ `LM` (X <= 28%), `CAM` (28% < X <= 72%), `RM` (X > 72%).
+  - **Y < 20%:** Vùng Tiền đạo ➔ `LW` (X <= 28%), `LF` (28% < X <= 42%), `ST` (42% < X <= 58%), `RF` (58% < X <= 72%), `RW` (X > 72%).
+
+### FR-3.3: Hiển Thị Thẻ Cầu Thủ Chuẩn Game 100% từ FIFAAddict
+- **Nghiệp vụ:** Tích hợp hình ảnh chân dung thật và logo mùa giải chính thức từ FIFAAddict.
+- **Cấu trúc asset:**
+  - **Player Avatar:** `https://vn.fifaaddict.com/fo4db/assets/players/p{uid}.png` (Fallback avatar mặc định nếu ảnh lỗi).
+  - **Season Logo Badge:** `https://vn.fifaaddict.com/fo4db/assets/season/{season_code}.png`.
+  - **Giao diện thẻ:** Giữ nguyên hiển thị OVR, chỉ số Lương số (không có chữ BP), tên cầu thủ và vị trí.
+
+---
+
+## 5. ĐÁNH GIÁ TÁC ĐỘNG VỚI CÁC PHIÊN BẢN CŨ (IMPACT ANALYSIS)
+
+| Thành phần / Tính năng phiên bản cũ | Mức độ tác động | Chi tiết đánh giá & Tương thích ngược |
+|:---|:---:|:---|
+| **v1.0.0 - Dual Theme (Dark/Light Mode)** | **KHÔNG ẢNH HƯỞNG** | Ảnh thẻ cầu thủ và logo mùa giải được thiết kế lớp nền trong suốt (PNG), hiển thị hoàn hảo trên cả 2 chế độ Dark Mode và Light Mode. |
+| **v1.0.0 - Quản lý Trần Lương (Salary Cap 300)** | **KHÔNG ẢNH HƯỞNG** | Quy tắc kiểm soát tổng Lương <= 300 và loại bỏ chữ "BP" giữ nguyên 100%. |
+| **v2.0.0 - Sân bóng 2D / 3D Perspective Toggle** | **KHÔNG ẢNH HƯỞNG** | Thuật toán Mapper vị trí dựa trên tọa độ phần trăm `(gridX, gridY)` chuẩn hóa, hoạt động chính xác đồng nhất ở cả góc nhìn 2D và 3D. |
+| **v2.0.0 - Chế độ Đấu 1v1 vs Giả Lập GLXH** | **KHÔNG ẢNH HƯỞNG** | Giữ nguyên các bộ lọc và quy tắc tư vấn chiến thuật riêng biệt cho 2 chế độ đấu. |
+| **v2.0.0 - AI Engine Giải thích Lý do Chiến thuật** | **KHÔNG ẢNH HƯỞNG** | AI Coach nhận thêm dữ liệu vị trí đã chuyển đổi và danh sách cầu thủ không trùng lặp để đưa ra lời khuyên chuẩn xác hơn. |
+| **v2.0.0 - Dữ liệu 2,306 Thẻ Cầu Thủ Chuẩn FIFAAddict** | **KHÔNG ẢNH HƯỞNG** | Giữ nguyên 2,306 thẻ độc bản đã được khử trùng lặp 100%, chỉ bổ sung thêm trường `avatarUrl` và `seasonBadgeUrl`. |
+
+➔ **Kết luận:** Phiên bản **v3.0.0 KHÔNG CÓ BREAKING CHANGES**, hoàn toàn tương thích ngược với dữ liệu và tính năng của v1.0.0 và v2.0.0.
+
+---
+
+## 6. TIÊU CHÍ NGHIỆM THU (ACCEPTANCE CRITERIA)
+
+1. **[AC-3.1]** Xếp `Cristiano Ronaldo [25TY]` vào ST ➔ Mở Drawer chọn cầu thủ thấy tất cả các thẻ `CR7 CC`, `CR7 IPRM`, `CR7 ICONTM` bị làm mờ (disabled) và không cho chọn.
+2. **[AC-3.2]** Kéo thả thẻ từ khu vực tiền đạo ST xuống vùng thủ môn (Y >= 88%) ➔ Nhãn vị trí trên thẻ và slot lập tức đổi từ `ST` thành `GK`.
+3. **[AC-3.3]** Kéo thẻ tới khu vực trung tuyến ➔ Tùy theo tọa độ X/Y nhãn hiển thị chính xác `CM`, `LCM`, `RCM`, `CDM`, `CAM`.
+4. **[AC-3.4]** Thẻ cầu thủ trên Sân bóng, Player DB và Modal So sánh hiển thị hình chân dung nét và logo mùa giải chính hãng từ FIFAAddict.
+5. **[AC-3.5]** Không gây lỗi trên các tính năng v1.0.0 và v2.0.0 (Chế độ Sáng/Tối, Lương trần 300, Sân 2D/3D, Chế độ đấu 1v1/GLXH).
