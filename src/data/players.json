@@ -21,27 +21,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_loqpzjpgo",
-    "name": "D. Blind",
-    "season": "LE",
-    "seasonFullName": "Girona FC",
-    "salary": 28,
-    "ovr": 112,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/loqpzjpgo",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_lonlyllov",
     "name": "D. Blind",
     "season": "FAC",
@@ -567,27 +546,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_jgjrrnrkq",
-    "name": "M. Ruggeri",
-    "season": "24UCL",
-    "seasonFullName": "Atlético de Madrid",
-    "salary": 22,
-    "ovr": 104,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/jgjrrnrkq",
-    "mainPositions": [
-      "LWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_jgpbpjywo",
     "name": "M. Ruggeri",
     "season": "25UCL",
@@ -700,27 +658,6 @@
     "salary": 28,
     "ovr": 115,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpjambmm",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_wnporzvgb",
-    "name": "W. Pacho",
-    "season": "PTG",
-    "seasonFullName": "Paris Saint-Germain",
-    "salary": 27,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnporzvgb",
     "mainPositions": [
       "CB"
     ],
@@ -3129,27 +3066,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_londnwdwp",
-    "name": "J. Schouten",
-    "season": "26TS",
-    "seasonFullName": "PSV",
-    "salary": 30,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/londnwdwp",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_loqrrlrpb",
     "name": "J. Schouten",
     "season": "24UCL",
@@ -3474,27 +3390,6 @@
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnmvvywkv",
     "mainPositions": [
       "LB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_wnpqmlbqy",
-    "name": "R. Bensebaini",
-    "season": "25UCL",
-    "seasonFullName": "Borussia Dortmund",
-    "salary": 25,
-    "ovr": 108,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpqmlbqy",
-    "mainPositions": [
-      "CB"
     ],
     "heightCm": 182,
     "weakFoot": "5/5",
@@ -4305,27 +4200,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_vgmpqazqj",
-    "name": "M. Richards",
-    "season": "26HR",
-    "seasonFullName": "26 HEROES",
-    "salary": 30,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/vgmpqazqj",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_vnwvqzjo",
     "name": "M. Richards",
     "season": "GR",
@@ -4692,27 +4566,6 @@
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzozbzyzn",
     "mainPositions": [
       "RW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_gzomgjywk",
-    "name": "J. Cole",
-    "season": "WG",
-    "seasonFullName": "Warriors of Glory",
-    "salary": 29,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzomgjywk",
-    "mainPositions": [
-      "LM"
     ],
     "heightCm": 182,
     "weakFoot": "5/5",
@@ -5577,27 +5430,6 @@
     ],
     "heightCm": 186,
     "weakFoot": "4/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_jgjzlzmyp",
-    "name": "L. Spinazzola",
-    "season": "LE",
-    "seasonFullName": "SSC Napoli",
-    "salary": 26,
-    "ovr": 110,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/jgjzlzmyp",
-    "mainPositions": [
-      "LWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -6699,27 +6531,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_lonkjdojl",
-    "name": "W. Saliba",
-    "season": "26TY",
-    "seasonFullName": "Arsenal",
-    "salary": 31,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/lonkjdojl",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_loqwwvgbo",
     "name": "W. Saliba",
     "season": "25TY",
@@ -7173,27 +6984,6 @@
     ],
     "heightCm": 187,
     "weakFoot": "3/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_gzodydmqn",
-    "name": "E. Álvarez",
-    "season": "CH",
-    "seasonFullName": "Fenerbahçe SK",
-    "salary": 28,
-    "ovr": 113,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzodydmqn",
-    "mainPositions": [
-      "CDM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 2,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -7707,27 +7497,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_opavrjkqv",
-    "name": "G. Konan",
-    "season": "PTG",
-    "seasonFullName": "Gil Vicente FC",
-    "salary": 26,
-    "ovr": 110,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opavrjkqv",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_oadnvwmjl",
     "name": "G. Konan",
     "season": "19A",
@@ -7802,27 +7571,6 @@
       "LB"
     ],
     "heightCm": 185,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_opawjaarb",
-    "name": "J. Gvardiol",
-    "season": "25DP",
-    "seasonFullName": "Manchester City",
-    "salary": 29,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opawjaarb",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
@@ -8547,27 +8295,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_ymkpjkmal",
-    "name": "J. Milner",
-    "season": "LE",
-    "seasonFullName": "Brighton & Hove Albion",
-    "salary": 29,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymkpjkmal",
-    "mainPositions": [
-      "CM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_ymkymdkyr",
     "name": "J. Milner",
     "season": "CU",
@@ -9043,27 +8770,6 @@
     "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_loqajnwjr",
-    "name": "A. Bastoni",
-    "season": "25TS",
-    "seasonFullName": "Lombardia FC",
-    "salary": 28,
-    "ovr": 116,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/loqajnwjr",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 2,
     "keyMetaTraits": [
       "Bứt tốc",
       "Dứt điểm",
@@ -9798,27 +9504,6 @@
     ],
     "heightCm": 183,
     "weakFoot": "3/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_royvlwljk",
-    "name": "A. Rațiu",
-    "season": "25TS",
-    "seasonFullName": "Rayo Vallecano",
-    "salary": 28,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/royvlwljk",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -11235,27 +10920,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_mzqzjkvwb",
-    "name": "S. Mané",
-    "season": "WS",
-    "seasonFullName": "Al Nassr",
-    "salary": 32,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/mzqzjkvwb",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_mzqmbjozm",
     "name": "S. Mané",
     "season": "HYL1",
@@ -12181,17 +11845,17 @@
   },
   {
     "id": "p_bmgkyqwqr",
-    "name": "T. Courtois",
+    "name": "Thibaut Courtois",
     "season": "26TYN",
-    "seasonFullName": "Real Madrid",
+    "seasonFullName": "Team Of The Year 2026 Nominate",
     "salary": 27,
     "ovr": 115,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgkyqwqr",
     "mainPositions": [
       "GK"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 200,
+    "weakFoot": "3/5",
     "skillMoves": 1,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -12250,27 +11914,6 @@
     "salary": 24,
     "ovr": 113,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmdzbrrpo",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_bmdrlogmn",
-    "name": "T. Courtois",
-    "season": "LE",
-    "seasonFullName": "Real Madrid",
-    "salary": 26,
-    "ovr": 113,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmdrlogmn",
     "mainPositions": [
       "GK"
     ],
@@ -13146,27 +12789,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_dydmdadgv",
-    "name": "A. Pavlović",
-    "season": "26TS",
-    "seasonFullName": "FC Bayern München",
-    "salary": 30,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/dydmdadgv",
-    "mainPositions": [
-      "CDM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_dydrzzklm",
     "name": "A. Pavlović",
     "season": "PTG",
@@ -13472,27 +13094,6 @@
       "LW"
     ],
     "heightCm": 185,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_pkvbvolrm",
-    "name": "K. Yıldız",
-    "season": "26TS",
-    "seasonFullName": "Juventus",
-    "salary": 32,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvbvolrm",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
@@ -13965,39 +13566,18 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_ymvogwobj",
-    "name": "D. Muñoz",
-    "season": "25DP",
-    "seasonFullName": "Crystal Palace",
-    "salary": 28,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymvogwobj",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_ymvayzzyo",
-    "name": "D. Muñoz",
+    "name": "Daniel Muñoz",
     "season": "FAC",
-    "seasonFullName": "Crystal Palace",
+    "seasonFullName": "Football Association Champions",
     "salary": 26,
     "ovr": 111,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymvayzzyo",
     "mainPositions": [
       "RWB"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 181,
+    "weakFoot": "3/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -14889,27 +14469,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvbvrprn",
-    "name": "M. Simakan",
-    "season": "26TS",
-    "seasonFullName": "Al Nassr",
-    "salary": 29,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvbvrprn",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_pkdolkqdy",
     "name": "M. Simakan",
     "season": "25TS",
@@ -15246,27 +14805,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_aavapbvyy",
-    "name": "H. Barnes",
-    "season": "WS",
-    "seasonFullName": "Newcastle United",
-    "salary": 29,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/aavapbvyy",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_aavznlpbo",
     "name": "H. Barnes",
     "season": "25UCL",
@@ -15484,27 +15022,6 @@
     "salary": 31,
     "ovr": 117,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/zlmymldvk",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_zlmlkwpob",
-    "name": "Y. Carrasco",
-    "season": "WS",
-    "seasonFullName": "Al Shabab",
-    "salary": 30,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/zlmlkwpob",
     "mainPositions": [
       "LW"
     ],
@@ -16002,27 +15519,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_ymvzbnwwd",
-    "name": "L. Karl",
-    "season": "26TS",
-    "seasonFullName": "FC Bayern München",
-    "salary": 30,
-    "ovr": 118,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymvzbnwwd",
-    "mainPositions": [
-      "CAM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_ymvdwzgzm",
     "name": "L. Karl",
     "season": "25UCL",
@@ -16150,7 +15646,7 @@
   },
   {
     "id": "p_pkvpaqzzr",
-    "name": "O. Kahn",
+    "name": "Oliver Kahn",
     "season": "WG",
     "seasonFullName": "Warriors of Glory",
     "salary": 29,
@@ -16159,29 +15655,8 @@
     "mainPositions": [
       "GK"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_pkvkwkamp",
-    "name": "O. Kahn",
-    "season": "WS",
-    "seasonFullName": "Winning Streak",
-    "salary": 27,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvkwkamp",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 188,
+    "weakFoot": "2/5",
     "skillMoves": 1,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -16192,7 +15667,7 @@
   },
   {
     "id": "p_pkvgvdrrq",
-    "name": "O. Kahn",
+    "name": "Oliver Kahn",
     "season": "FAC",
     "seasonFullName": "Football Association Champions",
     "salary": 27,
@@ -16201,8 +15676,8 @@
     "mainPositions": [
       "GK"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 188,
+    "weakFoot": "2/5",
     "skillMoves": 1,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -16317,27 +15792,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_bmgqbpgby",
-    "name": "A. Caci",
-    "season": "25DP",
-    "seasonFullName": "1. FSV Mainz 05",
-    "salary": 27,
-    "ovr": 113,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgqbpgby",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_bmdwpzzyg",
     "name": "A. Caci",
     "season": "24EP",
@@ -16413,27 +15867,6 @@
     ],
     "heightCm": 176,
     "weakFoot": "4/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_gzoaolpwv",
-    "name": "M. Godts",
-    "season": "26TS",
-    "seasonFullName": "Ajax",
-    "salary": 32,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzoaolpwv",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -17472,27 +16905,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvbvwvzy",
-    "name": "A. Kramarić",
-    "season": "26TS",
-    "seasonFullName": "TSG Hoffenheim",
-    "salary": 31,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvbvwvzy",
-    "mainPositions": [
-      "CAM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_pkvmogzql",
     "name": "A. Kramarić",
     "season": "PTG",
@@ -18009,27 +17421,6 @@
     ],
     "heightCm": 185,
     "weakFoot": "4/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_kjgygkrqm",
-    "name": "J. Veerman",
-    "season": "26TS",
-    "seasonFullName": "PSV",
-    "salary": 31,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/kjgygkrqm",
-    "mainPositions": [
-      "CM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -18753,27 +18144,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_ymvonkomd",
-    "name": "R. Bellanova",
-    "season": "25DP",
-    "seasonFullName": "Bergamo Calcio",
-    "salary": 27,
-    "ovr": 112,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymvonkomd",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_ymkywrrby",
     "name": "R. Bellanova",
     "season": "24EP",
@@ -18933,27 +18303,6 @@
     ],
     "heightCm": 185,
     "weakFoot": "4/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_kjgygdmlz",
-    "name": "M. Locatelli",
-    "season": "26TS",
-    "seasonFullName": "Juventus",
-    "salary": 31,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/kjgygdmlz",
-    "mainPositions": [
-      "CDM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -19404,27 +18753,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_jgjzlwvdy",
-    "name": "D. Zappacosta",
-    "season": "LE",
-    "seasonFullName": "Bergamo Calcio",
-    "salary": 26,
-    "ovr": 110,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/jgjzlwvdy",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_jgjrrplpm",
     "name": "D. Zappacosta",
     "season": "24UCL",
@@ -19761,39 +19089,18 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_wnporqdoj",
-    "name": "D. Dumfries",
-    "season": "PTG",
-    "seasonFullName": "Lombardia FC",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnporqdoj",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_wnpqmopbo",
-    "name": "D. Dumfries",
+    "name": "Denzel Dumfries",
     "season": "25UCL",
-    "seasonFullName": "Lombardia FC",
+    "seasonFullName": "25-26 UEFA Champions League",
     "salary": 27,
     "ovr": 112,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpqmopbo",
     "mainPositions": [
       "RWB"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 188,
+    "weakFoot": "3/5",
     "skillMoves": 2,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -19825,17 +19132,17 @@
   },
   {
     "id": "p_wnmamjjgj",
-    "name": "D. Dumfries",
+    "name": "Denzel Dumfries",
     "season": "GRU",
-    "seasonFullName": "Lombardia FC",
+    "seasonFullName": "Greatest Runner-Ups",
     "salary": 24,
     "ovr": 106,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnmamjjgj",
     "mainPositions": [
       "RWB"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 188,
+    "weakFoot": "3/5",
     "skillMoves": 2,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -21147,27 +20454,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_qymozbgor",
-    "name": "R. Aït-Nouri",
-    "season": "25DP",
-    "seasonFullName": "Manchester City",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/qymozbgor",
-    "mainPositions": [
-      "LWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_qymzkqkgw",
     "name": "R. Aït-Nouri",
     "season": "25UCL",
@@ -21326,27 +20612,6 @@
       "CAM"
     ],
     "heightCm": 181,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_opapkojmy",
-    "name": "K. De Bruyne",
-    "season": "WS",
-    "seasonFullName": "SSC Napoli",
-    "salary": 32,
-    "ovr": 118,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opapkojmy",
-    "mainPositions": [
-      "CAM"
-    ],
-    "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
@@ -23344,27 +22609,6 @@
     "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_ymvayzzyo",
-    "name": "Daniel Muñoz",
-    "season": "FAC",
-    "seasonFullName": "Football Association Champions",
-    "salary": 26,
-    "ovr": 111,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymvayzzyo",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 181,
-    "weakFoot": "3/5",
-    "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
       "Dứt điểm",
@@ -27951,27 +27195,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvpaoloo",
-    "name": "T. Howard",
-    "season": "WG",
-    "seasonFullName": "Warriors of Glory",
-    "salary": 25,
-    "ovr": 113,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvpaoloo",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_pkdlvprly",
     "name": "T. Howard",
     "season": "25HR",
@@ -28084,27 +27307,6 @@
     "salary": 33,
     "ovr": 126,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/owbyownm",
-    "mainPositions": [
-      "RW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_opaqvgnqw",
-    "name": "R. Mahrez",
-    "season": "HYL1",
-    "seasonFullName": "Al Ahli",
-    "salary": 31,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opaqvgnqw",
     "mainPositions": [
       "RW"
     ],
@@ -29673,27 +28875,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_aavlbomzz",
-    "name": "P. Estupiñán",
-    "season": "PTG",
-    "seasonFullName": "Milano FC",
-    "salary": 26,
-    "ovr": 111,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/aavlbomzz",
-    "mainPositions": [
-      "LWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_alvannlg",
     "name": "P. Estupiñán",
     "season": "23HW",
@@ -30870,27 +30051,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_gzozgmbnv",
-    "name": "P. Dybala",
-    "season": "WS",
-    "seasonFullName": "AS Roma",
-    "salary": 30,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzozgmbnv",
-    "mainPositions": [
-      "CAM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_gzdrnjolo",
     "name": "P. Dybala",
     "season": "25TS",
@@ -31605,27 +30765,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_gzomnodya",
-    "name": "B. Moore",
-    "season": "WG",
-    "seasonFullName": "Warriors of Glory",
-    "salary": 30,
-    "ovr": 118,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzomnodya",
-    "mainPositions": [
-      "CB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_gzoyvyzqz",
     "name": "B. Moore",
     "season": "FAC",
@@ -31900,38 +31039,17 @@
   },
   {
     "id": "p_bmgmjlapn",
-    "name": "G. Di Lorenzo",
+    "name": "Giovanni Di Lorenzo",
     "season": "WS",
-    "seasonFullName": "SSC Napoli",
+    "seasonFullName": "Winning Streak",
     "salary": 29,
     "ovr": 115,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgmjlapn",
     "mainPositions": [
       "RB"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_bmgdqndyq",
-    "name": "G. Di Lorenzo",
-    "season": "CH",
-    "seasonFullName": "SSC Napoli",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgdqndyq",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 183,
+    "weakFoot": "4/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -32268,27 +31386,6 @@
     ],
     "heightCm": 194,
     "weakFoot": "4/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_gzoaoynwa",
-    "name": "V. Muriqi",
-    "season": "26TS",
-    "seasonFullName": "RCD Mallorca",
-    "salary": 32,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzoaoynwa",
-    "mainPositions": [
-      "ST"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -33726,48 +32823,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_bmgkyqwqr",
-    "name": "Thibaut Courtois",
-    "season": "26TYN",
-    "seasonFullName": "Team Of The Year 2026 Nominate",
-    "salary": 27,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgkyqwqr",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 200,
-    "weakFoot": "3/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_wnpqmopbo",
-    "name": "Denzel Dumfries",
-    "season": "25UCL",
-    "seasonFullName": "25-26 UEFA Champions League",
-    "salary": 27,
-    "ovr": 112,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpqmopbo",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 188,
-    "weakFoot": "3/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_mzqrqgorj",
     "name": "Marco Palestra",
     "season": "26TS",
@@ -33780,27 +32835,6 @@
     ],
     "heightCm": 186,
     "weakFoot": "4/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_mzqrqgorj",
-    "name": "M. Palestra",
-    "season": "26TS",
-    "seasonFullName": "Cagliari",
-    "salary": 29,
-    "ovr": 118,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/mzqrqgorj",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -33843,27 +32877,6 @@
     ],
     "heightCm": 178,
     "weakFoot": "4/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_mzqrqkdvy",
-    "name": "E. Fernández",
-    "season": "26TS",
-    "seasonFullName": "Chelsea",
-    "salary": 31,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/mzqrqkdvy",
-    "mainPositions": [
-      "CM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -34146,27 +33159,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_bmgpgmpbn",
-    "name": "S. Al Dawsari",
-    "season": "26TS",
-    "seasonFullName": "Al Hilal",
-    "salary": 31,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgpgmpbn",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_bmdvzlvvw",
     "name": "S. Al Dawsari",
     "season": "25TS",
@@ -34369,27 +33361,6 @@
     "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_bmgmjlapn",
-    "name": "Giovanni Di Lorenzo",
-    "season": "WS",
-    "seasonFullName": "Winning Streak",
-    "salary": 29,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmgmjlapn",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 183,
-    "weakFoot": "4/5",
-    "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
       "Dứt điểm",
@@ -34767,27 +33738,6 @@
     ],
     "heightCm": 179,
     "weakFoot": "3/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_royrbayzg",
-    "name": "J. Cuadrado",
-    "season": "24UCL",
-    "seasonFullName": "Pisa",
-    "salary": 25,
-    "ovr": 106,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/royrbayzg",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 5,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -35973,27 +34923,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_kjgygajqb",
-    "name": "O. Dembélé",
-    "season": "26TS",
-    "seasonFullName": "Paris Saint-Germain",
-    "salary": 31,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/kjgygajqb",
-    "mainPositions": [
-      "ST"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_kjvnqvmgj",
     "name": "O. Dembélé",
     "season": "25TS",
@@ -36673,27 +35602,6 @@
     "salary": 27,
     "ovr": 116,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnmjjmawm",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_wnpmblryj",
-    "name": "E. Martínez",
-    "season": "CH",
-    "seasonFullName": "Aston Villa",
-    "salary": 27,
-    "ovr": 116,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpmblryj",
     "mainPositions": [
       "GK"
     ],
@@ -38913,27 +37821,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_qymyownwo",
-    "name": "F. Ljungberg",
-    "season": "WS",
-    "seasonFullName": "Winning Streak",
-    "salary": 29,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/qymyownwo",
-    "mainPositions": [
-      "RM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_qymvdqnpy",
     "name": "F. Ljungberg",
     "season": "WG",
@@ -39186,39 +38073,18 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvpanzlp",
-    "name": "B. Lizarazu",
-    "season": "WG",
-    "seasonFullName": "Warriors of Glory",
-    "salary": 29,
-    "ovr": 116,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvpanzlp",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_pkvdkwqgy",
-    "name": "B. Lizarazu",
+    "name": "Bixente Lizarazu",
     "season": "CH",
-    "seasonFullName": "Continental Heroes",
+    "seasonFullName": "Continental Heroes ",
     "salary": 28,
     "ovr": 114,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvdkwqgy",
     "mainPositions": [
       "LB"
     ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
+    "heightCm": 169,
+    "weakFoot": "3/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -39403,27 +38269,6 @@
     "salary": 30,
     "ovr": 118,
     "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnpjamyln",
-    "mainPositions": [
-      "CDM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_wnmrlwbww",
-    "name": "M. Caicedo",
-    "season": "25TS",
-    "seasonFullName": "Chelsea",
-    "salary": 29,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnmrlwbww",
     "mainPositions": [
       "CDM"
     ],
@@ -40047,27 +38892,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_opyrjznda",
-    "name": "R. Zentner",
-    "season": "25TS",
-    "seasonFullName": "1. FSV Mainz 05",
-    "salary": 26,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opyrjznda",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_obvqyzva",
     "name": "R. Zentner",
     "season": "HG",
@@ -40173,27 +38997,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvdkwqgy",
-    "name": "Bixente Lizarazu",
-    "season": "CH",
-    "seasonFullName": "Continental Heroes ",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvdkwqgy",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 169,
-    "weakFoot": "3/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_zlmlkbblm",
     "name": "Ferland Mendy",
     "season": "WS",
@@ -40205,27 +39008,6 @@
       "LB"
     ],
     "heightCm": 180,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_zlmlkbblm",
-    "name": "F. Mendy",
-    "season": "WS",
-    "seasonFullName": "Real Madrid",
-    "salary": 28,
-    "ovr": 113,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/zlmlkbblm",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
@@ -40668,27 +39450,6 @@
     ],
     "heightCm": 172,
     "weakFoot": "4/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_zlnpamvjg",
-    "name": "C. Tévez",
-    "season": "PRM",
-    "seasonFullName": "Prime",
-    "salary": 32,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/zlnpamvjg",
-    "mainPositions": [
-      "ST"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -42210,27 +40971,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_pkvgvdrrq",
-    "name": "Oliver Kahn",
-    "season": "FAC",
-    "seasonFullName": "Football Association Champions",
-    "salary": 27,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvgvdrrq",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 188,
-    "weakFoot": "2/5",
-    "skillMoves": 1,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_aanbqpwnp",
     "name": "Milos Kerkez",
     "season": "25TS",
@@ -42243,27 +40983,6 @@
     ],
     "heightCm": 180,
     "weakFoot": "3/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_aanbqpwnp",
-    "name": "M. Kerkez",
-    "season": "25TS",
-    "seasonFullName": "Liverpool",
-    "salary": 28,
-    "ovr": 115,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/aanbqpwnp",
-    "mainPositions": [
-      "LB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -43617,27 +42336,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_mznrbwrlb",
-    "name": "R. Pirès",
-    "season": "NO7",
-    "seasonFullName": "NUMBER 7",
-    "salary": 30,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/mznrbwrlb",
-    "mainPositions": [
-      "LM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_mzqojvodw",
     "name": "R. Pirès",
     "season": "WG",
@@ -43882,27 +42580,6 @@
     "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_pkvpaqzzr",
-    "name": "Oliver Kahn",
-    "season": "WG",
-    "seasonFullName": "Warriors of Glory",
-    "salary": 29,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/pkvpaqzzr",
-    "mainPositions": [
-      "GK"
-    ],
-    "heightCm": 188,
-    "weakFoot": "2/5",
-    "skillMoves": 1,
     "keyMetaTraits": [
       "Bứt tốc",
       "Dứt điểm",
@@ -45003,27 +43680,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_opyqpwbbk",
-    "name": "F. Dimarco",
-    "season": "25TYN",
-    "seasonFullName": "Lombardia FC",
-    "salary": 27,
-    "ovr": 112,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/opyqpwbbk",
-    "mainPositions": [
-      "LWB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_opaqylbba",
     "name": "F. Dimarco",
     "season": "25UCL",
@@ -45309,27 +43965,6 @@
     ],
     "heightCm": 193,
     "weakFoot": "3/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_vgmamnrkk",
-    "name": "S. McTominay",
-    "season": "26TS",
-    "seasonFullName": "SSC Napoli",
-    "salary": 31,
-    "ovr": 119,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/vgmamnrkk",
-    "mainPositions": [
-      "CM"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -46515,27 +45150,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_ymkjagpbj",
-    "name": "L. Suárez",
-    "season": "PRM",
-    "seasonFullName": "Inter Miami CF",
-    "salary": 34,
-    "ovr": 122,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/ymkjagpbj",
-    "mainPositions": [
-      "ST"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_ymvmqoovk",
     "name": "L. Suárez",
     "season": "WS",
@@ -47229,27 +45843,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_wnmamjjgj",
-    "name": "Denzel Dumfries",
-    "season": "GRU",
-    "seasonFullName": "Greatest Runner-Ups",
-    "salary": 24,
-    "ovr": 106,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/wnmamjjgj",
-    "mainPositions": [
-      "RWB"
-    ],
-    "heightCm": 188,
-    "weakFoot": "3/5",
-    "skillMoves": 2,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_bmdvzpdwz",
     "name": "Mattia Zaccagni",
     "season": "25TS",
@@ -47262,27 +45855,6 @@
     ],
     "heightCm": 177,
     "weakFoot": "4/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_bmdvzpdwz",
-    "name": "M. Zaccagni",
-    "season": "25TS",
-    "seasonFullName": "Latium",
-    "salary": 30,
-    "ovr": 116,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/bmdvzpdwz",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
       "Bứt tốc",
@@ -47786,27 +46358,6 @@
       "ST"
     ],
     "heightCm": 174,
-    "weakFoot": "5/5",
-    "skillMoves": 4,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_gzoaokzlw",
-    "name": "L. Martínez",
-    "season": "26TS",
-    "seasonFullName": "Lombardia FC",
-    "salary": 32,
-    "ovr": 120,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/gzoaokzlw",
-    "mainPositions": [
-      "ST"
-    ],
-    "heightCm": 182,
     "weakFoot": "5/5",
     "skillMoves": 4,
     "keyMetaTraits": [
@@ -48573,27 +47124,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_kjgjwwqzn",
-    "name": "K. Walker",
-    "season": "WS",
-    "seasonFullName": "Burnley",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/kjgjwwqzn",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_kjvlznodd",
     "name": "K. Walker",
     "season": "24EP",
@@ -49224,27 +47754,6 @@
     "estimatedBpRange": "Giá TTCN FCO"
   },
   {
-    "id": "p_lonlypdmb",
-    "name": "J. Sancho",
-    "season": "FAC",
-    "seasonFullName": "Aston Villa",
-    "salary": 31,
-    "ovr": 117,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/lonlypdmb",
-    "mainPositions": [
-      "LW"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
-    "skillMoves": 5,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
     "id": "p_loqjamyak",
     "name": "J. Sancho",
     "season": "WB",
@@ -49698,27 +48207,6 @@
     ],
     "heightCm": 177,
     "weakFoot": "4/5",
-    "skillMoves": 3,
-    "keyMetaTraits": [
-      "Bứt tốc",
-      "Dứt điểm",
-      "Kiến tạo"
-    ],
-    "estimatedBpRange": "Giá TTCN FCO"
-  },
-  {
-    "id": "p_jgpgkmvnw",
-    "name": "S. Coleman",
-    "season": "WS",
-    "seasonFullName": "Everton",
-    "salary": 28,
-    "ovr": 114,
-    "fifaAddictUrl": "https://vn.fifaaddict.com/fo4db/jgpgkmvnw",
-    "mainPositions": [
-      "RB"
-    ],
-    "heightCm": 182,
-    "weakFoot": "5/5",
     "skillMoves": 3,
     "keyMetaTraits": [
       "Bứt tốc",

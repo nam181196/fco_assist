@@ -115,7 +115,7 @@ export const PitchBoardView = ({
   }, []);
 
   const filteredPlayers = useMemo(() => {
-    return playersData.filter(p => {
+    const list = playersData.filter(p => {
       const matchesSearch = searchFilter === '' || 
         p.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
         p.season.toLowerCase().includes(searchFilter.toLowerCase()) ||
@@ -123,6 +123,18 @@ export const PitchBoardView = ({
       const matchesSeason = seasonFilter === '' || p.season === seasonFilter;
       return matchesSearch && matchesSeason;
     });
+
+    const seen = new Set();
+    const uniqueList = [];
+    for (const p of list) {
+      const key = `${p.name.toLowerCase().trim()}_${p.season.toUpperCase()}`;
+      if (!seen.has(key) && !seen.has(p.id)) {
+        seen.add(key);
+        seen.add(p.id);
+        uniqueList.push(p);
+      }
+    }
+    return uniqueList;
   }, [searchFilter, seasonFilter]);
 
   // 3D Pitch grass stripe rendering

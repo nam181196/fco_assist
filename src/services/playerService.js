@@ -29,7 +29,20 @@ export const getPlayers = (filters = {}) => {
     result = result.filter(p => p.bpPriceMin <= filters.maxBpPrice);
   }
 
-  return result;
+  // Strict Runtime Deduplication Guard: Guarantee 0 duplicates by card ID and name+season
+  const seenKeys = new Set();
+  const uniqueResult = [];
+  
+  for (const p of result) {
+    const key = `${p.name.toLowerCase().trim()}_${p.season.toUpperCase()}`;
+    if (!seenKeys.has(key) && !seenKeys.has(p.id)) {
+      seenKeys.add(key);
+      seenKeys.add(p.id);
+      uniqueResult.push(p);
+    }
+  }
+
+  return uniqueResult;
 };
 
 export const getPlayerById = (id) => {
