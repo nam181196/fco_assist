@@ -698,7 +698,7 @@ export const PitchBoardView = ({
               
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 800, fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {p.name}
+                  {p.name} <span style={{ color: 'var(--accent-gold)', fontSize: '0.75rem' }}>[{p.season}]</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
                   <span style={{

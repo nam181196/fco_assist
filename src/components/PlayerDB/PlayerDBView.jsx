@@ -208,7 +208,9 @@ export const PlayerDBView = () => {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px' }}>{player.name}</h3>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '4px' }}>
+                    {player.name} <span style={{ fontSize: '0.85rem', color: 'var(--accent-gold)' }}>[{player.season}]</span>
+                  </h3>
                   {player.fifaAddictUrl && player.fifaAddictUrl !== 'https://vn.fifaaddict.com/fo4db' && (
                     <a
                       href={player.fifaAddictUrl}
