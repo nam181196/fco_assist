@@ -4,6 +4,7 @@ import playersData from '../../data/players.json';
 import formationsData from '../../data/formations.json';
 import { calculatePositionFromCoords } from '../../utils/positionMapper';
 import { getPlayerAvatarUrl, getSeasonBadgeUrl } from '../../utils/assetResolver';
+import { getCanonicalPlayerName } from '../../hooks/useSquadStore';
 
 export const PitchBoardView = ({
   currentFormation,
@@ -78,25 +79,37 @@ export const PitchBoardView = ({
     e.currentTarget.setPointerCapture(e.pointerId);
   }, []);
 
-  // We handle pointer move on the PITCH container for smooth tracking
+  const dragRafRef = useRef(null);
+
+  // We handle pointer move on the PITCH container with rAF throttle for 60fps smoothness
   const handlePitchPointerMove = useCallback((e) => {
     if (!activeDraggingSlotId || !pitchRef.current) return;
     e.preventDefault();
     
-    const coords = screenToPitchCoords(e.clientX, e.clientY);
-    const dynamicRole = calculatePositionFromCoords(coords.gridX, coords.gridY);
-    
-    setCustomPositions(prev => ({
-      ...prev,
-      [activeDraggingSlotId]: {
-        ...coords,
-        dynamicRole
-      }
-    }));
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    if (dragRafRef.current) {
+      cancelAnimationFrame(dragRafRef.current);
+    }
+
+    dragRafRef.current = requestAnimationFrame(() => {
+      const coords = screenToPitchCoords(clientX, clientY);
+      const dynamicRole = calculatePositionFromCoords(coords.gridX, coords.gridY);
+      
+      setCustomPositions(prev => ({
+        ...prev,
+        [activeDraggingSlotId]: {
+          ...coords,
+          dynamicRole
+        }
+      }));
+    });
   }, [activeDraggingSlotId, screenToPitchCoords]);
 
   const handlePointerUp = useCallback((e) => {
     if (activeDraggingSlotId) {
+      if (dragRafRef.current) cancelAnimationFrame(dragRafRef.current);
       setActiveDraggingSlotId(null);
     }
   }, [activeDraggingSlotId]);
@@ -140,8 +153,41 @@ export const PitchBoardView = ({
         uniqueList.push(p);
       }
     }
+
+    // Smart Position Recommendation Sorting: Prioritize players matching target role
+    if (selectedSlotForAdd && selectedSlotForAdd.role) {
+      const targetRole = selectedSlotForAdd.role.toUpperCase();
+
+      const getRoleScore = (player) => {
+        if (!player.mainPositions) return 0;
+        const main = player.mainPositions.map(m => m.toUpperCase());
+        if (main.includes(targetRole)) return 100;
+
+        const defenders = ['GK', 'SW', 'CB', 'LCB', 'RCB', 'LB', 'RB', 'LWB', 'RWB'];
+        const wingbacks = ['LB', 'RB', 'LWB', 'RWB'];
+        const centerbacks = ['SW', 'CB', 'LCB', 'RCB'];
+        const midfielders = ['CDM', 'LDM', 'RDM', 'CM', 'LCM', 'RCM', 'CAM', 'LAM', 'RAM', 'LM', 'RM'];
+        const forwards = ['ST', 'CF', 'LF', 'RF', 'LS', 'RS', 'LW', 'RW'];
+
+        if (wingbacks.includes(targetRole) && main.some(m => wingbacks.includes(m))) return 60;
+        if (centerbacks.includes(targetRole) && main.some(m => centerbacks.includes(m))) return 60;
+        if (midfielders.includes(targetRole) && main.some(m => midfielders.includes(m))) return 50;
+        if (forwards.includes(targetRole) && main.some(m => forwards.includes(m))) return 60;
+        if (defenders.includes(targetRole) && main.some(m => defenders.includes(m))) return 40;
+
+        return 0;
+      };
+
+      uniqueList.sort((a, b) => {
+        const scoreA = getRoleScore(a);
+        const scoreB = getRoleScore(b);
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        return (b.ovr || 0) - (a.ovr || 0);
+      });
+    }
+
     return uniqueList;
-  }, [searchFilter, seasonFilter]);
+  }, [searchFilter, seasonFilter, selectedSlotForAdd]);
 
   // 3D Pitch grass stripe rendering
   const renderPitchGrass = () => {
@@ -664,13 +710,13 @@ export const PitchBoardView = ({
           <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px' }}>
             {filteredPlayers.map(p => {
               // Unique Player Rule Check across active squad slots
-              const normName = p.name.toLowerCase().trim();
+              const normName = getCanonicalPlayerName(p.name);
               let isDuplicateOnOtherSlot = false;
               let duplicateSeason = '';
 
               for (const [r, assignedP] of Object.entries(slotMap)) {
                 if (r === selectedSlotForAdd.role) continue;
-                if (assignedP && assignedP.name && assignedP.name.toLowerCase().trim() === normName) {
+                if (assignedP && assignedP.name && getCanonicalPlayerName(assignedP.name) === normName) {
                   isDuplicateOnOtherSlot = true;
                   duplicateSeason = assignedP.season;
                   break;

@@ -3,6 +3,13 @@ import formationsData from '../data/formations.json';
 import playersData from '../data/players.json';
 import { getSystemConfig, saveUserSquad, getUserSquads, duplicateUserSquad, deleteUserSquad } from '../services/localStorageService';
 
+export function getCanonicalPlayerName(name) {
+  if (!name) return '';
+  let clean = name.toLowerCase().trim().replace(/^[a-z]\.\s+/, '');
+  const parts = clean.split(/\s+/);
+  return parts[parts.length - 1];
+}
+
 export const useSquadStore = () => {
   const [systemConfig, setSystemConfig] = useState(() => getSystemConfig());
   const [selectedFormationId, setSelectedFormationId] = useState('4-2-3-1');
@@ -17,12 +24,22 @@ export const useSquadStore = () => {
     return formationsData.find(f => f.id === selectedFormationId) || formationsData[0];
   }, [selectedFormationId]);
 
-  // Load default players for 4-2-3-1
+  // Load 11 default UNIQUE players for formation (guaranteeing no duplicate player names)
   useEffect(() => {
     const defaultMap = {};
-    currentFormation.positions.forEach((pos, idx) => {
-      if (playersData[idx]) {
-        defaultMap[pos.role] = playersData[idx];
+    const usedNames = new Set();
+    let playerIdx = 0;
+
+    currentFormation.positions.forEach((pos) => {
+      while (playerIdx < playersData.length) {
+        const p = playersData[playerIdx];
+        playerIdx++;
+        const canonName = getCanonicalPlayerName(p.name);
+        if (!usedNames.has(canonName)) {
+          usedNames.add(canonName);
+          defaultMap[pos.role] = p;
+          break;
+        }
       }
     });
     setSlotMap(defaultMap);
@@ -36,14 +53,14 @@ export const useSquadStore = () => {
 
   const validateUniquePlayerConstraint = (candidatePlayer, targetRole, customPositions = null) => {
     if (!candidatePlayer || !candidatePlayer.name) return { allowed: true };
-    const normCandidateName = candidatePlayer.name.toLowerCase().trim();
+    const normCandidateName = getCanonicalPlayerName(candidatePlayer.name);
     const activeMap = customPositions || slotMap;
 
     for (const [role, data] of Object.entries(activeMap)) {
       if (role === targetRole) continue;
       const playerObj = data.player || data;
       if (playerObj && playerObj.name) {
-        const normExistingName = playerObj.name.toLowerCase().trim();
+        const normExistingName = getCanonicalPlayerName(playerObj.name);
         if (normExistingName === normCandidateName) {
           return {
             allowed: false,
