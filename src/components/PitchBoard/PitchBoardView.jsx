@@ -194,6 +194,24 @@ export const PitchBoardView = ({
     return uniqueList;
   }, [searchFilter, seasonFilter, selectedSlotForAdd]);
 
+  // Drawer Pagination State for Instant < 3ms UI Response
+  const [drawerLimit, setDrawerLimit] = useState(40);
+
+  useEffect(() => {
+    setDrawerLimit(40);
+  }, [selectedSlotForAdd, searchFilter, seasonFilter]);
+
+  const displayedDrawerPlayers = useMemo(() => {
+    return filteredPlayers.slice(0, drawerLimit);
+  }, [filteredPlayers, drawerLimit]);
+
+  const handleDrawerScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
+      setDrawerLimit(prev => Math.min(prev + 40, filteredPlayers.length));
+    }
+  };
+
   // 3D Pitch grass stripe rendering
   const renderPitchGrass = () => {
     if (pitchPerspective === '3D') {
@@ -720,8 +738,8 @@ export const PitchBoardView = ({
             </button>
           </div>
 
-          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px' }}>
-            {filteredPlayers.map(p => {
+          <div onScroll={handleDrawerScroll} style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '500px' }}>
+            {displayedDrawerPlayers.map(p => {
               // Unique Player Rule Check across active squad slots
               const normName = getCanonicalPlayerName(p.name);
               let isDuplicateOnOtherSlot = false;
@@ -929,8 +947,8 @@ export const PitchBoardView = ({
           </div>
         )}
 
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '500px' }}>
-          {filteredPlayers.map(p => (
+        <div onScroll={handleDrawerScroll} style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '500px' }}>
+          {displayedDrawerPlayers.map(p => (
             <div
               key={p.id}
               onClick={() => {
